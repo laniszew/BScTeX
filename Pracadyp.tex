@@ -469,17 +469,22 @@ Uzyskane dane oczywiście należy przechowywać w aplikacji. Komponenty tworząc
  
 \end{enumerate}
 
-Do ich obsługi wykorzystano wzorzec stanu narzucany przez bibliotekę Redux. Podstawowe elementy składniowe tego wzorca to:
+Do ich obsługi wykorzystano wzorzec stanu narzucany przez bibliotekę Redux (~Rysunek~\ref{fig:redux-flow}) Podstawowe elementy składniowe tego wzorca to:
 \begin{enumerate}
 
 	\item Action, czyli obiekt składający się z typu oraz ładunku (ang. payload). Każda akcja musi zostać wyemitowana poprzez wywołanie metody dispatch(action). 
 	
-	\item Reducer
+	\item Reducer, czyli funkcja odpowiadająca za zmianę stanu w odpowiedzi na wyemitowanie akcji. Zaleca się, aby funkcja pełniąca rolę reducera była 'pure function'.  
 	
-	\item Store
+	\item Store, czyli obiekt przechowujący stan aplikacji. Jego zmiany oraz ich przebieg definiowany jest przez reducery. 
 	
 \end{enumerate}
- Dla każdego z kontekstów oznacza to, że stan może zostać jedynie odczytany. Jakiekolwiek zmiany w stanie jest w stanie wywołać jedynie akcja 
+
+\rysunek{redux-flow}
+{Cykl życia Redux \label{fig:redux-flow}}
+{https://dev.to/radiumsharma06/abc-of-redux-5461}
+
+ Dla każdego z kontekstów oznacza to, że stan może zostać jedynie odczytany. Jakiekolwiek zmiany w stanie wywołuje jedynie reducer w odpowiedzi na określoną akcję. W funkcji reducera koniecznie należy zwrócić całkowicie nowy obiekt stanu po każdej modyfikacji. Dzięki temu możliwe jest wykonanie procedur powiązanych ze zmianą, w szczególności przerenderowanie powiązanych komponentów. Konieczność ta wynika ze wspomnianej natury języka, mutacja obiektu nie zmieni jego referencji. Co za tym idzie, porównanie zmienionego obiektu stanu z poprzednim zwróci wartość 'true' sugerującą brak zmian. Zgodnie z założeniami wzorca stanu dla każdego kontekstu (w tym wypadku pełniącego rolę 'store') utworzono wymagane akcje (kod źródłowy ~\ref{code: NMEA actions}) oraz funckję reducera (kod źródłowy ~\ref{code: NMEA reducer}).
 
 \code{Mutacja obiektu}
 {Opracowanie własne}{\label{code: js mutate}}
@@ -488,6 +493,129 @@ Do ich obsługi wykorzystano wzorzec stanu narzucany przez bibliotekę Redux. Po
  myObj.y = 4;
  // myObj is now {x: 1, y:4}
 \end{lstlisting}
+
+
+\code{Akcje kontekstu konektora NMEA}
+{Opracowanie własne}{\label{code: NMEA actions}}
+\begin{lstlisting}[language=JavaScript]
+export const NmeaConnectorActions = {
+    setConnected: (flag: boolean) => createAction(ActionTypes.SET_CONNECTED, flag),
+    setData: (data: any) => createAction(ActionTypes.SET_DATA, data),
+    setUrl: (url: string) => createAction(ActionTypes.SET_URL, url)
+};
+
+export type NmeaConnectorActions = ActionsUnion<typeof NmeaConnectorActions>;
+
+\end{lstlisting}
+
+\code{Funkcja reducera dla konektora NMEA}
+{Opracowanie własne}{\label{code: NMEA reducer}}
+\begin{lstlisting}[language=JavaScript]
+const nmeaReducer = (state: INmeaConnectorState, action: NmeaConnectorActions): INmeaConnectorState => {
+    switch (action.type) {
+        case ActionTypes.SET_CONNECTED: {
+            return { ...state, connected: action.payload };
+        }
+        case ActionTypes.SET_DATA: {
+            return { ...state, data: action.payload };
+        }
+        case ActionTypes.SET_URL: {
+            return { ...state, url: action.payload };
+        }
+        default: {
+            throw new Error(`Unhandled action type: ${action}`);
+        }
+    }
+};
+\end{lstlisting}
+
+Dzięki takiemu rozwiązaniu warstwa abstrakcji definiująca strukturę globalnych danych oraz przebieg ich zmian oddzielona jest od warstwy widoku. Dane dostarczane przez konteksty są konsumowane przez zależne od nich komponenty. W tym celu utworzono tak zwane 'hooki'. Jest to wzorzec wprowadzony przez twórców biblioteki React oraz frameworka ReactNative, określający metody pozwalające na skorzystanie z wewnętrznego stanu oraz cyklu życia komponentu w ciele funkcji. Wspomniane metody dostarczane są przez framework, a ich cechą charakterystyczną jest przedrostek 'use' występujący na początku każdej funkcji (przykładowo 'useState', 'useEffect').  Docelowym zamysłem twórców jest wykorzystanie ich do tworzenia własnych 'hooków' będących funkcjami zawierającymi współdzieloną logikę. Taką logiką w omawianej aplikacji jest użycie kontekstów. Każdy z nich zbudowany jest przy użyciu natywnych  'useContext' oraz 'useReducer'. Użycie pierwszego z nich przedstawia wiersz dwudziesty czwarty  kod źródłowy ~\ref{code: position context}, gdzie 'PositionContext' zdefiniowany jest w wierszu dwunastym ~\ref{code: position context}. Wykorzystanie 'useReducer' przedstawia wiersz piętnasty ~\ref{code: position context}. Zwraca on obiekt stanu oraz metodę 'dispatch' służące do odczytu stanu oraz emisji akcji. Wiersze od dwudziestego trzeciego do dwudziestego dziewiątego ~\ref{code: position context} zawierają definicję własnego hooka.
+   
+\code{Definicja kontekstu oraz hooka pozycji jednostki}
+{Opracowanie własne}{\label{code: position context}}
+\begin{lstlisting}[language=JavaScript]
+export interface IPositionState {
+    GGA: GGAPacket | null;
+    GLL: GLLPacket | null;
+    GSA: GSAPacket | null;
+}
+
+export interface IPositionContext {
+    state: IPositionState,
+    dispatch: Dispatch<PositionActions>
+}
+
+const PositionContext = createContext<IPositionContext | undefined>(undefined);
+
+const PositionProvider = ({ children }) => {
+    const [state, dispatch] = React.useReducer(positionReducer, initialState);
+    return (
+        <PositionContext.Provider value={{ state, dispatch }}>
+            {children}
+        </PositionContext.Provider>
+    );
+};
+
+const usePosition = (): IPositionContext => {
+    const context = React.useContext(PositionContext);
+    if (context === undefined) {
+        throw new Error('usePosition must be used within a PositionProvider');
+    }
+    return context;
+};
+\end{lstlisting}
+
+Posiadając w ten sposób zdefiniowany kontekst programista zyskuje prosty i intuicyjny sposób na jego wykorzystanie w dowolnym komponencie niezależnie od jego umiejscowienia w hierarchii. Przykład użycia przedstawia ~\ref{code: hook consumer}
+
+\code{Przykładowy komponent konsumujący hook kontekstu}
+{Opracowanie własne}{\label{code: hook consumer}}
+\begin{lstlisting}[language=JavaScript]
+// funkcja stworzona w celach edytorskich
+function ConsumerComponent() {
+    const unit = useUnit();
+    
+    // access state
+    const MTWPacket = unit.state.MTW;
+    
+    // dispatch action
+    unit.dispatch(UnitActions.setFrameData({ frameType: 'MTW', frameData: data })
+    
+    return <View><ChildComponents /></View>
+
+\end{lstlisting}
+
+Konteksty dotyczące jednostki oraz pozycji zawierają sformatowane zdania (wiersze od pierwszego do piątego ~\ref{code: position context}), które użyte zostały do zbudowania GUI. Za przekształcenie otrzymywanego ciągu znaków do struktur pakietów zawartych w kontekstach odpowiada metoda przedstawiona w kodzie źródłowym ~\ref{code: parse&dispatch}). Jest ona wywoływana przez każdą zmianę stanu kontekstu 'nmeaConnectorContext', czyli przy odbiorze danych z serwera. Otrzymany ciąg znaków ulega podziałowi względem znacznika końca linii. Każdy element tablicy wynikowej tego podziału poddawany jest próbie dekodowania. Uzyskane dane przypisane zostają do ładunku akcji dla określonego kontekstu w zależności od identyfikatora zdania. Dzięki temu komponenty reprezentujące widok mogą bazować na spreparowanych danych zawartych w kontekstach 'unitContext' oraz 'positionContext', gdyż są one aktualizowane natychmiastowo po otrzymaniu wiadomości z serwera.
+
+\code{Dekodowanie i dystrybucja otrzymanych danych}
+{Opracowanie własne}{\label{code: parse&dispatch}}
+\begin{lstlisting}[language=JavaScript]
+    const nmeaConnector = useNmeaConnector();
+    const position = usePosition();
+    const unit = useUnit();
+
+    useDeepCompareEffect(() => {
+        if (nmeaConnector.state.connected && Object.keys(nmeaConnector.state.data).length > 0) {
+            const frames = nmeaConnector.state.data.split(/\r?\n/);
+            frames.map((frame: string) => {
+                try {
+                    const response = parseNmeaSentence(frame);
+                    if (isPositionPacket(response)) {
+                        position.dispatch(PositionActions.setFrameData({ frameType: response.sentenceId, frameData: response }))
+                    }
+                    else if(isUnitPacket(response)) {
+                        unit.dispatch(UnitActions.setFrameData({ frameType: response.sentenceId, frameData: response }))
+                    }
+                }
+                catch(error) {
+                    console.error('Parsing error, invalid input data: ', error)
+                }
+            })
+        }
+    }, [nmeaConnector.state])
+\end{lstlisting}
+
+
+\section{Graphial User Interface (GUI)}\label{sec: GUI}
 
 \begin{enumerate}
 
