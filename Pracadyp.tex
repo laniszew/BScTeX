@@ -198,21 +198,67 @@ GP &\makecell{Global Positioning \\ System (GPS)} & RMC & \makecell{Recommended 
 II & Integrated instrumentation & VHW & Water speed and heading
 \end{tabular}}
 
-// 1. Protokół NMEA:
-	- format
-	- talker IDs
-	- sentence IDs
-	- sentences decoded by app
-// 2. Przegląd dostępnych rozwiązań
-	- problem z parsowaniem tylko GPS w większości rozwiązań
-	- problem z integracją generycznych parserów z GUI (dają z każdej ramki generyczny obiekt, gdzie nie wiemy co znaczy jakie pole)
-// 3. Aplikacja:
-	- język JS (Typescript)
-	- framework (React Native, expo)
-	- Zarządzanie stanem (context, akcje, reducery, hooki)
-	- komunikacja z serwerem (web socket w contexcie)
-	- generyczny parser i kodeki
-	
+\chapter{Przegląd dostępnych rozwiązań}\label{chap: Available solutions}
+
+Gałąż przemysłu (biznesu) morskiego może być uważana za sektor, gdzie bezpieczeństwo gra odgórną rolę, stąd standard NMEA definiuje także warstwę elektryczną interfejsu i w tym przypadku jest to EIA-422 - czyli połączenie z jednym masterem oraz wieloma slave'ami. Istnieje także standard de-facto, który mówi o pakowaniu ramek NMEA w datagram UDP - ale nie opisuje go formalnie żaden dokument.
+
+Chcąc dokonać kategoryzacji istniejących rozwiązań należałoby zastanowić się nad ograniczeniem ich spektrum, ponieważ wiele firm oferuje rozwiązania programowo-sprzętowe, które są gateway'em między fizycznym połączeniem EIA-422 (zdefiniowanym przez standard) - a siecią WiFi. Przykładem takiego rozwiązania jest produkt WLN10 Smart firmy DIGITAL YACHT pozwalający na udostępnianie danych NMEA przez WiFi. Koszt tego produktu to 150£. W dalszej części omówione zostaną aplikacje wizualizujące owe dane .
+
+\section{Rozwiązania darmowe}\label{chap: Free solutions}
+
+Darmowe rozwiązania dostępne dla urządzeń mobilnych są w większości przypadków mocno ograniczone, niewspierane przez twórcę lub twórców, obarczone licznymi błędami. Przykładowe aplikacje:
+\begin{enumerate}
+
+\item NMEA Tools (https://play.google.com/store/apps/details?id=com.peterhohsy.nmeatools) ~Rysunek~\ref{fig:NMEA-Tools} w wersji darmowej pozwala na odczyt danych NMEA z pliku tekstowego, co mocno ograniczna użyteczeność tego rozwiązania. 
+
+\item NavMonitor (https://play.google.com/store/apps/details?id=com.aboni.boatinga)  ~Rysunek~\ref{fig:NavMonitor} wizualizuje dane dotyczące między innymi wiatru, pozycji, prędkości jednostki, czy temperatury oraz głębokości wody. Nie posiada jednak przedstawienia obiektu na mapie, co jest znaczącą wadą. 
+
+\item SeaWi Marine (https://play.google.com/store/apps/details?id=net.seawimarine.activities) ~Rysunek~\ref{fig:SeaWi-Marine} jest jednym z najbardziej rozbudowanych rozwiązań. Aplikacja oferuje wiele funkcjonalności, w tym wizualzację danych w formie zarówno graficznej, czyli przedstawione na mapie jak i tekstowej w postaci zdekodowanych informacji. Pozwala na tworzenie punktów kontrolnych, konfigurację alarmów, a w tym także możliwość wysłania wiadomości SMS w przypadku ich wystąpienia, oraz wiele innych. Wadą jest niekompletny zestaw map, na chwilę obecną obejmujący Europę, Amerykę Północną, Morze Śródziemne, Morze Czarne, Karaiby, Australię, Nową Zelandię, Pacyfik oraz Afrykę Północną. Twórcy zapewniają, że mapy dla reszty świata zostaną dostarczone w przyszłości.
+
+\rysunek{NMEA-Tools}
+{NMEA Tools \label{fig:NMEA-Tools}}
+{https://play.google.com/store/apps/details?id=com.peterhohsy.nmeatools}
+
+\rysunek{NavMonitor}
+{NavMonitor \label{fig:NavMonitor}}
+{https://play.google.com/store/apps/details?id=com.aboni.boatinga}
+
+\rysunek{SeaWi-Marine}
+{SeaWi Marine \label{fig:SeaWi-Marine}}
+{https://play.google.com/store/apps/details?id=net.seawimarine.activities}
+
+\end{enumerate}
+
+\section{Rozwiązania komercyjne}\label{chap: Commercial solutions}
+
+Płatne rozwiązania zrealizowane są w modelu jednorazowej płatności za oprogramowania lub konieczności wykupienia czasowej subskrypcji, aby uzyskać dostęp do pełni funkcjonalności. Najczęściej subskrypcją objęty jest dostęp do map. Przykładowe aplikacje:
+\begin{enumerate}
+
+\item iRegatta Pro (https://play.google.com/store/apps/details?id=dk.letscreate.aRegatta) ~Rysunek~\ref{fig:iRegatta} pozwala na odczyt danych dotyczących między innymi wiatru, prędkości jednostki i jej położenia. Oprócz komunikacji sieciowej wspiera także komunikację przy wykorzystaniu BlueTooth. Brakuje wizualizacji obiektu na mapie. Cena tej aplikacji wynosi 69,99 złotych.
+
+\item Seapilot (https://play.google.com/store/apps/details?id=com.seapilot.android) ~Rysunek~\ref{fig:Seapilot} oferuje przede wszystkim pełen detali widok mapy, przeznaczony do specjalistycznego użycia. Podstawowe informacje na temat jednostki widoczne są w formie tekstowej. Dostęp do pełni funkcjonalności wymaga wykupienia licencji na stronie producenta. Cena wynosi 39,99\$ rocznie. Dodatkowo należy wykupić mapy obejmujące interesujące użytkownika rejony, również opłacane rocznie.
+
+\item NMEAremote (https://apps.apple.com/us/app/nmearemote/id412806204) ~Rysunek~\ref{fig:NMEAremote} podobnie jak konkurencja przedstawienie zdekodowanych danych w przyjaznej dla użytkownika formie. Brakuje przedstawienia obiektu na mapie. Twórcy zapewniają listę wspieranych zdań protokołu NMEA 0183 oraz NMEA 2000. Jest to odpowiednio trzydzieści siedem oraz dziewiętnaście typów zdań. Kosz aplikacji wynosi 17,99\$.  
+
+
+\rysunek{iRegatta}
+{iRegatta Pro \label{fig:iRegatta}}
+{https://play.google.com/store/apps/details?id=dk.letscreate.aRegatta}
+
+\rysunek{Seapilot}
+{Seapilot \label{fig:Seapilot}}
+{https://play.google.com/store/apps/details?id=com.seapilot.android} 
+
+\rysunek{NMEAremote}
+{NMEAremote \label{fig:NMEAremote}}
+{https://apps.apple.com/us/app/nmearemote/id412806204} 
+
+
+\end{enumerate}
+
+\section{Podsumowanie}\label{chap: summary}
+
+Dostępne rozwiązania nie są perfekcyjne, jednak w przybliżeniu pokrywają się z celem pracy. Wiele dostępnych aplikacji zostało pomięte w tym rozdziale z uwagi na olbrzymią liczbę negatywnych komentarzy użytkowników, często implikujących całkowitą niezdatność oprogramowania do użytku. Aby uzyskać w pełni spersonalizowane rozwiązanie należy je stworzyć. W kolejnym rozdziale przedstawiony został sposób doboru narzędzi oraz motywy stojące za poszczególnymi wyborami, a także proces tworzenia aplikacji wraz z wyszczególnieniem głównych konceptów kodu źródłowego.
 
 \chapter{Aplikacja Mobilna}\label{chap:Mobile App}
 
@@ -616,6 +662,8 @@ Konteksty dotyczące jednostki oraz pozycji zawierają sformatowane zdania (wier
 
 
 \section{Graphial User Interface (GUI)}\label{sec: GUI}
+
+% reconsilation, virtual DOM. React Native korzysta z Virtual DOMu na tej samej zasadzie co React, tylko po procesie rekonsilacji wywoływane są ponownie natywne elementy danej platformy zależnie od renderera (iOS/Android) a nie webowe. React Native używa Fiber tak samo jak ReactJS.
 
 \begin{enumerate}
 
