@@ -1,0 +1,514 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global}
+    \entry{Redux}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=96ed906d3a763ce2d916fe6037aebffe}{%
+           family={Abramov},
+           familyi={A\bibinitperiod},
+           given={Dan},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{96ed906d3a763ce2d916fe6037aebffe}
+      \strng{fullhash}{96ed906d3a763ce2d916fe6037aebffe}
+      \strng{bibnamehash}{96ed906d3a763ce2d916fe6037aebffe}
+      \strng{authorbibnamehash}{96ed906d3a763ce2d916fe6037aebffe}
+      \strng{authornamehash}{96ed906d3a763ce2d916fe6037aebffe}
+      \strng{authorfullhash}{96ed906d3a763ce2d916fe6037aebffe}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://redux.js.org/}}
+      \field{title}{Dokumentacja Redux}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://redux.js.org/
+      \endverb
+      \verb{url}
+      \verb https://redux.js.org/
+      \endverb
+    \endentry
+    \entry{Babel}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=53718118d84d26983528d262b37ea0be}{%
+           family={Babel},
+           familyi={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{53718118d84d26983528d262b37ea0be}
+      \strng{fullhash}{53718118d84d26983528d262b37ea0be}
+      \strng{bibnamehash}{53718118d84d26983528d262b37ea0be}
+      \strng{authorbibnamehash}{53718118d84d26983528d262b37ea0be}
+      \strng{authornamehash}{53718118d84d26983528d262b37ea0be}
+      \strng{authorfullhash}{53718118d84d26983528d262b37ea0be}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://babeljs.io/}}
+      \field{title}{Dokumentacja Babel}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://babeljs.io/
+      \endverb
+      \verb{url}
+      \verb https://babeljs.io/
+      \endverb
+    \endentry
+    \entry{NMEA0183}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=d4b5045ecf9ed9bd565928f785e05e7f}{%
+           family={Betke},
+           familyi={B\bibinitperiod},
+           given={Klaus},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{d4b5045ecf9ed9bd565928f785e05e7f}
+      \strng{fullhash}{d4b5045ecf9ed9bd565928f785e05e7f}
+      \strng{bibnamehash}{d4b5045ecf9ed9bd565928f785e05e7f}
+      \strng{authorbibnamehash}{d4b5045ecf9ed9bd565928f785e05e7f}
+      \strng{authornamehash}{d4b5045ecf9ed9bd565928f785e05e7f}
+      \strng{authorfullhash}{d4b5045ecf9ed9bd565928f785e05e7f}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.tronico.fi/OH6NT/docs/NMEA0183.pdf}}
+      \field{month}{5}
+      \field{title}{The NMEA 0183 Protocol}
+      \field{year}{2000}
+      \verb{urlraw}
+      \verb https://www.tronico.fi/OH6NT/docs/NMEA0183.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.tronico.fi/OH6NT/docs/NMEA0183.pdf
+      \endverb
+    \endentry
+    \entry{NavMonitor}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=0eb0e3fe02c137472b1f2bada2619b93}{%
+           family={Boni},
+           familyi={B\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{0eb0e3fe02c137472b1f2bada2619b93}
+      \strng{fullhash}{0eb0e3fe02c137472b1f2bada2619b93}
+      \strng{bibnamehash}{0eb0e3fe02c137472b1f2bada2619b93}
+      \strng{authorbibnamehash}{0eb0e3fe02c137472b1f2bada2619b93}
+      \strng{authornamehash}{0eb0e3fe02c137472b1f2bada2619b93}
+      \strng{authorfullhash}{0eb0e3fe02c137472b1f2bada2619b93}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://play.google.com/store/apps/details?id=com.aboni.boatinga}}
+      \field{month}{9}
+      \field{title}{Aplikacja NavMonitor}
+      \field{year}{2019}
+      \verb{urlraw}
+      \verb https://play.google.com/store/apps/details?id=com.aboni.boatinga/
+      \endverb
+      \verb{url}
+      \verb https://play.google.com/store/apps/details?id=com.aboni.boatinga/
+      \endverb
+    \endentry
+    \entry{Expo}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=c29f23f279126757ba18ec74d0d27cfa}{%
+           family={Expo},
+           familyi={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{c29f23f279126757ba18ec74d0d27cfa}
+      \strng{fullhash}{c29f23f279126757ba18ec74d0d27cfa}
+      \strng{bibnamehash}{c29f23f279126757ba18ec74d0d27cfa}
+      \strng{authorbibnamehash}{c29f23f279126757ba18ec74d0d27cfa}
+      \strng{authornamehash}{c29f23f279126757ba18ec74d0d27cfa}
+      \strng{authorfullhash}{c29f23f279126757ba18ec74d0d27cfa}
+      \field{sortinit}{E}
+      \field{sortinithash}{c554bd1a0b76ea92b9f105fe36d9c7b0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://docs.expo.io/versions/v37.0.0/}}
+      \field{title}{Dokumentacja Expo}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://docs.expo.io/versions/v37.0.0/
+      \endverb
+      \verb{url}
+      \verb https://docs.expo.io/versions/v37.0.0/
+      \endverb
+    \endentry
+    \entry{React}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=d85544fce402c7a2a96a48078edaf203}{%
+           family={Facebook},
+           familyi={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{d85544fce402c7a2a96a48078edaf203}
+      \strng{fullhash}{d85544fce402c7a2a96a48078edaf203}
+      \strng{bibnamehash}{d85544fce402c7a2a96a48078edaf203}
+      \strng{authorbibnamehash}{d85544fce402c7a2a96a48078edaf203}
+      \strng{authornamehash}{d85544fce402c7a2a96a48078edaf203}
+      \strng{authorfullhash}{d85544fce402c7a2a96a48078edaf203}
+      \field{extraname}{1}
+      \field{sortinit}{F}
+      \field{sortinithash}{fb0c0faa89eb6abae8213bf60e6799ea}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://reactjs.org/}}
+      \field{title}{Dokumentacja ReactJs}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://reactjs.org/
+      \endverb
+      \verb{url}
+      \verb https://reactjs.org/
+      \endverb
+    \endentry
+    \entry{ReactNative}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=d85544fce402c7a2a96a48078edaf203}{%
+           family={Facebook},
+           familyi={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{d85544fce402c7a2a96a48078edaf203}
+      \strng{fullhash}{d85544fce402c7a2a96a48078edaf203}
+      \strng{bibnamehash}{d85544fce402c7a2a96a48078edaf203}
+      \strng{authorbibnamehash}{d85544fce402c7a2a96a48078edaf203}
+      \strng{authornamehash}{d85544fce402c7a2a96a48078edaf203}
+      \strng{authorfullhash}{d85544fce402c7a2a96a48078edaf203}
+      \field{extraname}{2}
+      \field{sortinit}{F}
+      \field{sortinithash}{fb0c0faa89eb6abae8213bf60e6799ea}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://reactnative.dev/}}
+      \field{title}{Dokumentacja ReactNative}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://reactnative.dev/
+      \endverb
+      \verb{url}
+      \verb https://reactnative.dev/
+      \endverb
+    \endentry
+    \entry{NMEATools}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=babbc8fbf9e3f7d333e2d8509095617b}{%
+           family={Ho},
+           familyi={H\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{babbc8fbf9e3f7d333e2d8509095617b}
+      \strng{fullhash}{babbc8fbf9e3f7d333e2d8509095617b}
+      \strng{bibnamehash}{babbc8fbf9e3f7d333e2d8509095617b}
+      \strng{authorbibnamehash}{babbc8fbf9e3f7d333e2d8509095617b}
+      \strng{authornamehash}{babbc8fbf9e3f7d333e2d8509095617b}
+      \strng{authorfullhash}{babbc8fbf9e3f7d333e2d8509095617b}
+      \field{sortinit}{H}
+      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://play.google.com/store/apps/details?id=com.peterhohsy.nmeatools}}
+      \field{month}{3}
+      \field{title}{Aplikacja NMEA Tools}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://play.google.com/store/apps/details?id=com.peterhohsy.nmeatools
+      \endverb
+      \verb{url}
+      \verb https://play.google.com/store/apps/details?id=com.peterhohsy.nmeatools
+      \endverb
+    \endentry
+    \entry{FrameworksPopularity}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=e4ba827009498f60becb01efd4b35036}{%
+           family={Krotoff},
+           familyi={K\bibinitperiod},
+           given={Tanguy},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{e4ba827009498f60becb01efd4b35036}
+      \strng{fullhash}{e4ba827009498f60becb01efd4b35036}
+      \strng{bibnamehash}{e4ba827009498f60becb01efd4b35036}
+      \strng{authorbibnamehash}{e4ba827009498f60becb01efd4b35036}
+      \strng{authornamehash}{e4ba827009498f60becb01efd4b35036}
+      \strng{authorfullhash}{e4ba827009498f60becb01efd4b35036}
+      \field{sortinit}{K}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://gist.github.com/tkrotoff/b1caa4c3a185629299ec234d2314e190}}
+      \field{month}{12}
+      \field{title}{Front-end frameworks popularity (React, Vue and Angular)}
+      \field{year}{2019}
+      \verb{urlraw}
+      \verb https://gist.github.com/tkrotoff/b1caa4c3a185629299ec234d2314e190
+      \endverb
+      \verb{url}
+      \verb https://gist.github.com/tkrotoff/b1caa4c3a185629299ec234d2314e190
+      \endverb
+    \endentry
+    \entry{iRegatta}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=41fe6aa562097f037a74c7657fe938e6}{%
+           family={Ltd},
+           familyi={L\bibinitperiod},
+           given={Madman\bibnamedelimb Marine\bibnamedelima Pty},
+           giveni={M\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+      }
+      \strng{namehash}{41fe6aa562097f037a74c7657fe938e6}
+      \strng{fullhash}{41fe6aa562097f037a74c7657fe938e6}
+      \strng{bibnamehash}{41fe6aa562097f037a74c7657fe938e6}
+      \strng{authorbibnamehash}{41fe6aa562097f037a74c7657fe938e6}
+      \strng{authornamehash}{41fe6aa562097f037a74c7657fe938e6}
+      \strng{authorfullhash}{41fe6aa562097f037a74c7657fe938e6}
+      \field{sortinit}{L}
+      \field{sortinithash}{dad3efd0836470093a7b4a7bb756eb8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://play.google.com/store/apps/details?id=dk.letscreate.aRegatta}}
+      \field{month}{3}
+      \field{title}{Aplikacja iRegatta}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb https://play.google.com/store/apps/details?id=dk.letscreate.aRegatta
+      \endverb
+      \verb{url}
+      \verb https://play.google.com/store/apps/details?id=dk.letscreate.aRegatta
+      \endverb
+    \endentry
+    \entry{SeaWiMarine}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=c9ede34be23d54c77300c06a0b1f4f39}{%
+           family={Marine},
+           familyi={M\bibinitperiod},
+           given={SeaWi},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{c9ede34be23d54c77300c06a0b1f4f39}
+      \strng{fullhash}{c9ede34be23d54c77300c06a0b1f4f39}
+      \strng{bibnamehash}{c9ede34be23d54c77300c06a0b1f4f39}
+      \strng{authorbibnamehash}{c9ede34be23d54c77300c06a0b1f4f39}
+      \strng{authornamehash}{c9ede34be23d54c77300c06a0b1f4f39}
+      \strng{authorfullhash}{c9ede34be23d54c77300c06a0b1f4f39}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://play.google.com/store/apps/details?id=net.seawimarine.activities}}
+      \field{month}{4}
+      \field{title}{Aplikacja SeaWi Marine}
+      \field{year}{2019}
+      \verb{urlraw}
+      \verb https://play.google.com/store/apps/details?id=net.seawimarine.activities
+      \endverb
+      \verb{url}
+      \verb https://play.google.com/store/apps/details?id=net.seawimarine.activities
+      \endverb
+    \endentry
+    \entry{Raymond2019}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=54a2a72b576ed340cbad4320514b664e}{%
+           family={Raymond},
+           familyi={R\bibinitperiod},
+           given={Eric\bibnamedelima S.},
+           giveni={E\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{54a2a72b576ed340cbad4320514b664e}
+      \strng{fullhash}{54a2a72b576ed340cbad4320514b664e}
+      \strng{bibnamehash}{54a2a72b576ed340cbad4320514b664e}
+      \strng{authorbibnamehash}{54a2a72b576ed340cbad4320514b664e}
+      \strng{authornamehash}{54a2a72b576ed340cbad4320514b664e}
+      \strng{authorfullhash}{54a2a72b576ed340cbad4320514b664e}
+      \field{sortinit}{R}
+      \field{sortinithash}{b9c68a358aea118dfa887b6e902414a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://gpsd.gitlab.io/gpsd/NMEA.html}}
+      \field{month}{3}
+      \field{title}{Strona internetowa}
+      \field{year}{2019}
+      \verb{urlraw}
+      \verb https://gpsd.gitlab.io/gpsd/NMEA.html
+      \endverb
+      \verb{url}
+      \verb https://gpsd.gitlab.io/gpsd/NMEA.html
+      \endverb
+    \endentry
+    \entry{Seapilot}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=5f2dbd34e4e90c90666da658dec94afe}{%
+           family={Seapilot},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{5f2dbd34e4e90c90666da658dec94afe}
+      \strng{fullhash}{5f2dbd34e4e90c90666da658dec94afe}
+      \strng{bibnamehash}{5f2dbd34e4e90c90666da658dec94afe}
+      \strng{authorbibnamehash}{5f2dbd34e4e90c90666da658dec94afe}
+      \strng{authornamehash}{5f2dbd34e4e90c90666da658dec94afe}
+      \strng{authorfullhash}{5f2dbd34e4e90c90666da658dec94afe}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://play.google.com/store/apps/details?id=com.seapilot.android}}
+      \field{month}{6}
+      \field{title}{Aplikacja Seapilot}
+      \field{year}{2019}
+      \verb{urlraw}
+      \verb https://play.google.com/store/apps/details?id=com.seapilot.android
+      \endverb
+      \verb{url}
+      \verb https://play.google.com/store/apps/details?id=com.seapilot.android
+      \endverb
+    \endentry
+    \entry{ReactNativeRenderers}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=4eaeb14bb860a686f1f5d482301caf62}{%
+           family={Shailesh},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{4eaeb14bb860a686f1f5d482301caf62}
+      \strng{fullhash}{4eaeb14bb860a686f1f5d482301caf62}
+      \strng{bibnamehash}{4eaeb14bb860a686f1f5d482301caf62}
+      \strng{authorbibnamehash}{4eaeb14bb860a686f1f5d482301caf62}
+      \strng{authornamehash}{4eaeb14bb860a686f1f5d482301caf62}
+      \strng{authorfullhash}{4eaeb14bb860a686f1f5d482301caf62}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://medium.com/@agent_hunt/introduction-to-react-native-renderers-aka-react-native-is-the-java-and-react-native-renderers-are-828a0022f433}}
+      \field{month}{6}
+      \field{title}{Introduction to React Native Renderers aka React Native is the Java and React Native Renderers are the JVMs of declarative UI}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb https://medium.com/@agent_hunt/introduction-to-react-native-renderers-aka-react-native-is-the-java-and-react-native-renderers-are-828a0022f433
+      \endverb
+      \verb{url}
+      \verb https://medium.com/@agent_hunt/introduction-to-react-native-renderers-aka-react-native-is-the-java-and-react-native-renderers-are-828a0022f433
+      \endverb
+    \endentry
+    \entry{ReduxABC}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=b3f99704c8e20db8bf22ca59566c0e0f}{%
+           family={Sharma},
+           familyi={S\bibinitperiod},
+           given={Radium},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{b3f99704c8e20db8bf22ca59566c0e0f}
+      \strng{fullhash}{b3f99704c8e20db8bf22ca59566c0e0f}
+      \strng{bibnamehash}{b3f99704c8e20db8bf22ca59566c0e0f}
+      \strng{authorbibnamehash}{b3f99704c8e20db8bf22ca59566c0e0f}
+      \strng{authornamehash}{b3f99704c8e20db8bf22ca59566c0e0f}
+      \strng{authorfullhash}{b3f99704c8e20db8bf22ca59566c0e0f}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://dev.to/radiumsharma06/abc-of-redux-5461}}
+      \field{month}{3}
+      \field{title}{ABC of Redux}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb https://dev.to/radiumsharma06/abc-of-redux-5461
+      \endverb
+      \verb{url}
+      \verb https://dev.to/radiumsharma06/abc-of-redux-5461
+      \endverb
+    \endentry
+    \entry{gpsinformation}{misc}{}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.gpsinformation.org/dale/nmea.htm}}
+      \field{title}{Strona internetowa}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://www.gpsinformation.org/dale/nmea.htm
+      \endverb
+      \verb{url}
+      \verb https://www.gpsinformation.org/dale/nmea.htm
+      \endverb
+    \endentry
+    \entry{DIGITALYACHT}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=d1ca3ad0572b6d25b49f4d9a5776f0ef}{%
+           family={YACHT},
+           familyi={Y\bibinitperiod},
+           given={DIGITAL},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{d1ca3ad0572b6d25b49f4d9a5776f0ef}
+      \strng{fullhash}{d1ca3ad0572b6d25b49f4d9a5776f0ef}
+      \strng{bibnamehash}{d1ca3ad0572b6d25b49f4d9a5776f0ef}
+      \strng{authorbibnamehash}{d1ca3ad0572b6d25b49f4d9a5776f0ef}
+      \strng{authornamehash}{d1ca3ad0572b6d25b49f4d9a5776f0ef}
+      \strng{authorfullhash}{d1ca3ad0572b6d25b49f4d9a5776f0ef}
+      \field{sortinit}{Y}
+      \field{sortinithash}{6ae2ff5458ff901249c2745238c951b7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://digitalyacht.co.uk/product/wln10sm/}}
+      \field{title}{Opis produktu WLN10 Smart firmy DIGITAL YACHT}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://digitalyacht.co.uk/product/wln10sm/
+      \endverb
+      \verb{url}
+      \verb https://digitalyacht.co.uk/product/wln10sm/
+      \endverb
+    \endentry
+    \entry{NMEAremote}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=2dcb2d42c1ad72c03d39605e91b69870}{%
+           family={zapfware},
+           familyi={z\bibinitperiod}}}%
+      }
+      \strng{namehash}{2dcb2d42c1ad72c03d39605e91b69870}
+      \strng{fullhash}{2dcb2d42c1ad72c03d39605e91b69870}
+      \strng{bibnamehash}{2dcb2d42c1ad72c03d39605e91b69870}
+      \strng{authorbibnamehash}{2dcb2d42c1ad72c03d39605e91b69870}
+      \strng{authornamehash}{2dcb2d42c1ad72c03d39605e91b69870}
+      \strng{authorfullhash}{2dcb2d42c1ad72c03d39605e91b69870}
+      \field{sortinit}{z}
+      \field{sortinithash}{8f7b480688e809b50b6f6577b16f3db5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://apps.apple.com/us/app/nmearemote/id412806204}}
+      \field{month}{9}
+      \field{title}{Aplikacja NMEAremote}
+      \field{year}{2016}
+      \verb{urlraw}
+      \verb https://apps.apple.com/us/app/nmearemote/id412806204
+      \endverb
+      \verb{url}
+      \verb https://apps.apple.com/us/app/nmearemote/id412806204
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

@@ -7,6 +7,7 @@
 
 \documentclass[skorowidz,skroty]{dyplomWEZUT}
 \usepackage{makecell}
+\usepackage{float}
 % ------------------------------------------------------------------------------
 % Opcje klasy <dyplomWEZUT>
 % 1) skorowidz - włącza skorowidz
@@ -63,10 +64,10 @@
 \jednostka{Katedra Przetwarzania Sygnałów i Inżynierii Multimedialnej}
 
 % Słowa kluczowe
-\slowakluczowe{słowo kluczowe 1, słowo kluczowe 2, ... maksymalnie 5 słów kluczowych}
+\slowakluczowe{NMEA, aplikacja mobilna, wizualizacja}
 
 % Słowa kluczowe po angielsku
-\keywords{first keyword, second keyword, .... max. 5 keywords}
+\keywords{NMEA, mobile application, visualization}
 
 %% ----------------------- Koniec definicji danych -----------------------------
 
@@ -93,27 +94,27 @@ Komunikacja między urządzeniami elektronicznymi jest obecnie standardem. Zale�
 
 \cel{Celem pracy jest stworzenie aplikacji mobilnej prezentującej aktualne parametry jednostki pływającej.}
 
-\zakres{Przegląd aktualnie stosowanych rozwiązań w zakresie parametrów jednostek pływających oraz metod ich prezentacji, zapoznanie się i opisanie standardu dla protokołu \textit{NMEA} (National Marine Electronics Association) oraz stworzenie aplikacji mobilnej na Smartphone wraz z GUI (Graphical User Interface) prezentującej aktualne parametry jednostki pływającej z wykorzystaniem sieci \textit{WiFi} jednostki pływającej. Celem dodatkowym jest przetestowanie aplikacji w warunkach rzeczywistych na jednostce pływającej.} 
+\zakres{Przegląd aktualnie stosowanych rozwiązań w zakresie parametrów jednostek pływających oraz metod ich prezentacji, zapoznanie się i opisanie standardu dla protokołu \textit{NMEA} (National Marine Electronics Association) oraz stworzenie aplikacji mobilnej na Smartphone wraz z \textit{GUI} (Graphical User Interface) prezentującej aktualne parametry jednostki pływającej z wykorzystaniem sieci \textit{WiFi} jednostki pływającej. Celem dodatkowym jest przetestowanie aplikacji w warunkach rzeczywistych na jednostce pływającej.} 
 
-\chapter{Protokół NMEA.}\label{chap:NMEA protocol}
+\chapter{Protokół NMEA}\label{chap:NMEA protocol}
 
-Komunikacja między morskimi urządzeniami elektronicznymi wykorzystuje protokół \textit{NMEA}. Wyróżniamy dwie wersje tego protokołu – \textit{NMEA 0183} oraz \textit{NMEA 2000}. Obecnie interfejs \textit{NMEA 0183} zastępowany jest przez nowszy \textit{NMEA 2000}, jednak praca dotyczy będącego przez lata standardem oraz ciągle wykorzystywanego starszego protokołu. Odniesienia do protokołu NMEA w dalszej części pracy oznaczać będą wersję 0183. 
+Komunikacja między morskimi urządzeniami elektronicznymi wykorzystuje protokół \textit{NMEA}. Wyróżniamy dwie wersje tego protokołu – \textit{NMEA 0183} oraz \textit{NMEA 2000}. Obecnie interfejs \textit{NMEA 0183} zastępowany jest przez nowszy \textit{NMEA 2000}, jednak praca dotyczy będącego przez lata standardem oraz ciągle wykorzystywanego starszego protokołu. Odniesienia do protokołu \textit{NMEA} w dalszej części pracy oznaczać będą wersję 0183. 
 
 \section{Format zdania NMEA}\label{sec:format nmea}
 
-Należy wydzielić podstawowe typy zdań: talker sentences (źródeł danych), proprietary sentences (zdefiniowanych przez poszczególnych producentów), query sentences (zapytań). Pierwszy typ, na którym skupia się ta praca, obejmuje sygnały GPS,  dane z urządzeń wbudowanych w jednostkę, czujników. Typ drugi pozwala indywidualnym producentom zdefiniować własne formaty, zdania tego typu zaczynają się od znaków \texttt{„\$P”} poprzedzających trzy literowy identyfikator producenta. Następnie zawarte są dane, o których decyduje producent. Ostatni typ pozwala urządzeniu zażądać wybranego rodzaju zdania od innego urządzenia. Ogólne formaty zdań wyglądają następująco:
+Na podstawie \cite{NMEA0183} należy wydzielić podstawowe typy zdań: talker sentences (źródeł danych), proprietary sentences (zdefiniowanych przez poszczególnych producentów), query sentences (zapytań). Pierwszy typ, na którym skupia się ta praca, obejmuje sygnały GPS,  dane z urządzeń wbudowanych w jednostkę, czujników. Typ drugi pozwala indywidualnym producentom zdefiniować własne formaty, zdania tego typu zaczynają się od znaków \texttt{„\$P”} poprzedzających trzy literowy identyfikator producenta. Następnie zawarte są dane, o których decyduje producent. Ostatni typ pozwala urządzeniu zażądać wybranego rodzaju zdania od innego urządzenia. Ogólne formaty zdań wyglądają następująco:
 \begin{enumerate}
 \item Talker Sentence - \texttt{\$ttsss,d1,d2,....<CR><LF>}, gdzie „tt” oznacza identyfikator nadawcy, „sss” identyfikator zdania, a „d1, d2…” kolejne pola danych. 
 \item Proprietary Sentence - \texttt{\$Psss,d1,d,2,…<CR><LF>}, gdzie „sss” oznacza identyfikator producenta, a „d1,d2...” kolejne pola danych.
 \item Query Sentence - \texttt{\$ttllQ,sss,<CR><LF>}, gdzie „tt” oznacza identyfikator żądającego, „ll” identyfikator urządzenia, do którego zostało skierowane zapytanie, a „sss” identyfikator żądanego zdania.
 \end{enumerate}
-Każde zdanie nadane w protokole NMEA zaczyna się od znaku „\$”, dane oddzielone są przecinkami, a zdanie kończy się sumą kontrolną poprzedzoną znakiem „*”.
+Każde zdanie nadane w protokole \textit{NMEA} zaczyna się od znaku „\$”, dane oddzielone są przecinkami, a zdanie kończy się sumą kontrolną poprzedzoną znakiem „*”.
 
 \section{Identyfikatory nadawców}\label{sec:talker ids}
-Identyfikatory nadawców rozróżniają sentencje NMEA ze względu na źródło danych, o których mowa w danym zdaniu.
+Identyfikatory nadawców rozróżniają sentencje \textit{NMEA} ze względu na źródło danych, o których mowa w danym zdaniu.
 
 \code{Identyfikatory nadawców}
-{Opracowanie własne}{\label{code:Talkers enum}}
+{Opracowanie własne \cite{gpsinformation, Raymond2019}}{\label{code:Talkers enum}}
 \begin{lstlisting}[language=JavaScript]
 enum TalkerIdentifiers {
     AG= 'AG', AP= 'AP', CD= 'CD', CR= 'CR', CS= 'CS', CT= 'CT', CV= 'CV',
@@ -125,7 +126,7 @@ enum TalkerIdentifiers {
 \end{lstlisting}
 
 \code{Deskryptory nadawców}
-{Opracowanie własne}{\label{code: talkers descriptors}}
+{Opracowanie własne na podstawie \cite{gpsinformation, Raymond2019}}{\label{code: talkers descriptors}}
 \begin{lstlisting}[language=JavaScript]
 const TalkerDescriptors: Record<TalkerIdentifiers, string> = {
     [TalkerIdentifiers.AG]: 'Autopilot - General',
@@ -141,7 +142,7 @@ const TalkerDescriptors: Record<TalkerIdentifiers, string> = {
 \section{Identyfikatory zdań}\label{sec:sentence ids}
 Lista wspieranych przez aplikację identyfikatorów zdań.
 \code{Identyfikatory zdań}
-{Opracowanie własne}{\label{code:Sentences enum}}
+{Opracowanie własne na podstawie \cite{gpsinformation, Raymond2019}}{\label{code:Sentences enum}}
 \begin{lstlisting}[language=JavaScript]
 enum SentenceIdentifiers {
     AAM= 'AAM', ALM= 'ALM', APA= 'APA', APB= 'APB', ASD= 'ASD', BEC= 'BEC',
@@ -161,7 +162,7 @@ enum SentenceIdentifiers {
 \end{lstlisting}
 
 \code{Deskryptory zdań}
-{Opracowanie własne}{\label{code: sentences descriptors}}
+{Opracowanie własne na podstawie \cite{gpsinformation, Raymond2019}}{\label{code: sentences descriptors}}
 \begin{lstlisting}[language=JavaScript]
 const SentencesDescriptions: Record<SentenceIdentifiers, string> = {
     [SentenceIdentifiers.AAM]: 'Waypoint Arrival Alarm',
@@ -175,9 +176,9 @@ const SentencesDescriptions: Record<SentenceIdentifiers, string> = {
 \end{lstlisting}
 
 \section{Zdania ujęte w aplikacji}\label{sec:application sentences}
-Z racji bardzo dużej ilości istniejących zdań protokołu NMEA do realizacji pracy inżynierskiej zostały wybrane zdania uwzględnione w używanym symulatorze NMEA Simulator. Oznacza to pełne dekodowanie oraz wyświetlanie danych w nich zawartych, jednak aplikacja została stworzona w taki sposób, aby dodawanie kolejnych zdań było jak najprostsze. Szczegóły zostaną omówione w dalszym rozdziale. Dane dostarczone przez symulator opisują zarówno położenie jak i dane na temat samej jednostki. Na ich podstawie zbudowany został interfejs graficzny aplikacji. Pełna lista znajduje się w tabeli 1.1.
+Z racji bardzo dużej ilości istniejących zdań protokołu \textit{NMEA} do realizacji pracy inżynierskiej zostały wybrane zdania uwzględnione w używanym symulatorze \textit{NMEA Simulator}. Oznacza to pełne dekodowanie oraz wyświetlanie danych w nich zawartych, jednak aplikacja została stworzona w taki sposób, aby dodawanie kolejnych zdań było jak najprostsze. Szczegóły zostaną omówione w dalszym rozdziale. Dane dostarczone przez symulator opisują zarówno położenie jak i dane na temat samej jednostki. Na ich podstawie zbudowany został interfejs graficzny aplikacji. Pełna lista znajduje się w tabeli 1.1.
 
-\tabela{Zdania NMEA w pełni dekodowane przez aplikacje\label{tab:application sentences table}}
+\tabela{Zdania \textit{NMEA} w pełni dekodowane przez aplikacje\label{tab:application sentences table}}
 {Opracowanie własne}
 {\begin{tabular}{c|c|c|c}
 \thead{Identyfikator \\ nadawcy} & Nadawca & \thead{Identyfikator \\ zdania} & Zdanie \\\hline\hline
@@ -200,59 +201,71 @@ II & Integrated instrumentation & VHW & Water speed and heading
 
 \chapter{Przegląd dostępnych rozwiązań}\label{chap: Available solutions}
 
-Gałąż przemysłu (biznesu) morskiego może być uważana za sektor, gdzie bezpieczeństwo gra odgórną rolę, stąd standard NMEA definiuje także warstwę elektryczną interfejsu i w tym przypadku jest to EIA-422 - czyli połączenie z jednym masterem oraz wieloma slave'ami. Istnieje także standard de-facto, który mówi o pakowaniu ramek NMEA w datagram UDP - ale nie opisuje go formalnie żaden dokument.
+Gałąż przemysłu (biznesu) morskiego może być uważana za sektor, gdzie bezpieczeństwo gra odgórną rolę, stąd standard \textit{NMEA} definiuje także warstwę elektryczną interfejsu i w tym przypadku jest to \textit{EIA-422} - czyli połączenie z jednym masterem oraz wieloma slave'ami. Istnieje także standard de-facto, który mówi o pakowaniu ramek \textit{NMEA} w datagram UDP - ale nie opisuje go formalnie żaden dokument.
 
-Chcąc dokonać kategoryzacji istniejących rozwiązań należałoby zastanowić się nad ograniczeniem ich spektrum, ponieważ wiele firm oferuje rozwiązania programowo-sprzętowe, które są gateway'em między fizycznym połączeniem EIA-422 (zdefiniowanym przez standard) - a siecią WiFi. Przykładem takiego rozwiązania jest produkt WLN10 Smart firmy DIGITAL YACHT pozwalający na udostępnianie danych NMEA przez WiFi. Koszt tego produktu to 150£. W dalszej części omówione zostaną aplikacje wizualizujące owe dane .
+Chcąc dokonać kategoryzacji istniejących rozwiązań należałoby zastanowić się nad ograniczeniem ich spektrum, ponieważ wiele firm oferuje rozwiązania programowo-sprzętowe, które są gateway'em między fizycznym połączeniem \textit{EIA-422} (zdefiniowanym przez standard) - a siecią \textit{WiFi}. Przykładem takiego rozwiązania jest produkt \textit{WLN10 Smart} firmy \textit{DIGITAL YACHT} \cite{DIGITALYACHT} pozwalający na udostępnianie danych \textit{NMEA} przez \textit{WiFi}. Koszt tego produktu to 150£. W dalszej części omówione zostaną aplikacje wizualizujące owe dane .
 
 \section{Rozwiązania darmowe}\label{chap: Free solutions}
 
 Darmowe rozwiązania dostępne dla urządzeń mobilnych są w większości przypadków mocno ograniczone, niewspierane przez twórcę lub twórców, obarczone licznymi błędami. Przykładowe aplikacje:
 \begin{enumerate}
 
-\item NMEA Tools (https://play.google.com/store/apps/details?id=com.peterhohsy.nmeatools) ~Rysunek~\ref{fig:NMEA-Tools} w wersji darmowej pozwala na odczyt danych NMEA z pliku tekstowego, co mocno ograniczna użyteczeność tego rozwiązania. 
+\item \textit{NMEA Tools} \cite{NMEATools} ~Rysunek~\ref{fig:NMEA-Tools} w wersji darmowej pozwala na odczyt danych \textit{NMEA} z pliku tekstowego, co mocno ograniczna użyteczeność tego rozwiązania. 
 
-\item NavMonitor (https://play.google.com/store/apps/details?id=com.aboni.boatinga)  ~Rysunek~\ref{fig:NavMonitor} wizualizuje dane dotyczące między innymi wiatru, pozycji, prędkości jednostki, czy temperatury oraz głębokości wody. Nie posiada jednak przedstawienia obiektu na mapie, co jest znaczącą wadą. 
+\item \textit{NavMonitor} \cite{NavMonitor} ~Rysunek~\ref{fig:NavMonitor} wizualizuje dane dotyczące między innymi wiatru, pozycji, prędkości jednostki, czy temperatury oraz głębokości wody. Nie posiada jednak przedstawienia obiektu na mapie, co jest znaczącą wadą. 
 
-\item SeaWi Marine (https://play.google.com/store/apps/details?id=net.seawimarine.activities) ~Rysunek~\ref{fig:SeaWi-Marine} jest jednym z najbardziej rozbudowanych rozwiązań. Aplikacja oferuje wiele funkcjonalności, w tym wizualzację danych w formie zarówno graficznej, czyli przedstawione na mapie jak i tekstowej w postaci zdekodowanych informacji. Pozwala na tworzenie punktów kontrolnych, konfigurację alarmów, a w tym także możliwość wysłania wiadomości SMS w przypadku ich wystąpienia, oraz wiele innych. Wadą jest niekompletny zestaw map, na chwilę obecną obejmujący Europę, Amerykę Północną, Morze Śródziemne, Morze Czarne, Karaiby, Australię, Nową Zelandię, Pacyfik oraz Afrykę Północną. Twórcy zapewniają, że mapy dla reszty świata zostaną dostarczone w przyszłości.
+\item \textit{SeaWi Marine} \cite{SeaWiMarine} ~Rysunek~\ref{fig:SeaWi-Marine} jest jednym z najbardziej rozbudowanych rozwiązań. Aplikacja oferuje wiele funkcjonalności, w tym wizualzację danych w formie zarówno graficznej, czyli przedstawione na mapie jak i tekstowej w postaci zdekodowanych informacji. Pozwala na tworzenie punktów kontrolnych, konfigurację alarmów, a w tym także możliwość wysłania wiadomości SMS w przypadku ich wystąpienia, oraz wiele innych. Wadą jest niekompletny zestaw map, na chwilę obecną obejmujący Europę, Amerykę Północną, Morze Śródziemne, Morze Czarne, Karaiby, Australię, Nową Zelandię, Pacyfik oraz Afrykę Północną. Twórcy zapewniają, że mapy dla reszty świata zostaną dostarczone w przyszłości.
 
-\rysunek{NMEA-Tools}
+\rysunek{\textit{NMEA-Tools}}
 {NMEA Tools \label{fig:NMEA-Tools}}
 {https://play.google.com/store/apps/details?id=com.peterhohsy.nmeatools}
 
-\rysunek{NavMonitor}
+\rysunek{\textit{NavMonitor}}
 {NavMonitor \label{fig:NavMonitor}}
 {https://play.google.com/store/apps/details?id=com.aboni.boatinga}
 
-\rysunek{SeaWi-Marine}
+\rysunek{\textit{SeaWi-Marine}}
 {SeaWi Marine \label{fig:SeaWi-Marine}}
 {https://play.google.com/store/apps/details?id=net.seawimarine.activities}
 
 \end{enumerate}
-
+\newpage
 \section{Rozwiązania komercyjne}\label{chap: Commercial solutions}
 
 Płatne rozwiązania zrealizowane są w modelu jednorazowej płatności za oprogramowania lub konieczności wykupienia czasowej subskrypcji, aby uzyskać dostęp do pełni funkcjonalności. Najczęściej subskrypcją objęty jest dostęp do map. Przykładowe aplikacje:
 \begin{enumerate}
 
-\item iRegatta Pro (https://play.google.com/store/apps/details?id=dk.letscreate.aRegatta) ~Rysunek~\ref{fig:iRegatta} pozwala na odczyt danych dotyczących między innymi wiatru, prędkości jednostki i jej położenia. Oprócz komunikacji sieciowej wspiera także komunikację przy wykorzystaniu BlueTooth. Brakuje wizualizacji obiektu na mapie. Cena tej aplikacji wynosi 69,99 złotych.
+\item \textit{iRegatta Pro} \cite{iRegatta} ~Rysunek~\ref{fig:iRegatta} pozwala na odczyt danych dotyczących między innymi wiatru, prędkości jednostki i jej położenia. Oprócz komunikacji sieciowej wspiera także komunikację przy wykorzystaniu \textit{BlueTooth}. Brakuje wizualizacji obiektu na mapie. Cena tej aplikacji wynosi 69,99 złotych.
 
-\item Seapilot (https://play.google.com/store/apps/details?id=com.seapilot.android) ~Rysunek~\ref{fig:Seapilot} oferuje przede wszystkim pełen detali widok mapy, przeznaczony do specjalistycznego użycia. Podstawowe informacje na temat jednostki widoczne są w formie tekstowej. Dostęp do pełni funkcjonalności wymaga wykupienia licencji na stronie producenta. Cena wynosi 39,99\$ rocznie. Dodatkowo należy wykupić mapy obejmujące interesujące użytkownika rejony, również opłacane rocznie.
+\item \textit{Seapilot} \cite{Seapilot} ~Rysunek~\ref{fig:Seapilot} oferuje przede wszystkim pełen detali widok mapy, przeznaczony do specjalistycznego użycia. Podstawowe informacje na temat jednostki widoczne są w formie tekstowej. Dostęp do pełni funkcjonalności wymaga wykupienia licencji na stronie producenta. Cena wynosi 39,99\$ rocznie. Dodatkowo należy wykupić mapy obejmujące interesujące użytkownika rejony, również opłacane rocznie.
 
-\item NMEAremote (https://apps.apple.com/us/app/nmearemote/id412806204) ~Rysunek~\ref{fig:NMEAremote} podobnie jak konkurencja przedstawienie zdekodowanych danych w przyjaznej dla użytkownika formie. Brakuje przedstawienia obiektu na mapie. Twórcy zapewniają listę wspieranych zdań protokołu NMEA 0183 oraz NMEA 2000. Jest to odpowiednio trzydzieści siedem oraz dziewiętnaście typów zdań. Kosz aplikacji wynosi 17,99\$.  
+\item \textit{NMEAremote} \cite{NMEAremote} ~Rysunek~\ref{fig:NMEAremote} podobnie jak konkurencja przedstawienie zdekodowanych danych w przyjaznej dla użytkownika formie. Brakuje przedstawienia obiektu na mapie. Twórcy zapewniają listę wspieranych zdań protokołu \textit{NMEA 0183} oraz \textit{NMEA 2000}. Jest to odpowiednio trzydzieści siedem oraz dziewiętnaście typów zdań. Kosz aplikacji wynosi 17,99\$.  
 
 \end{enumerate}
 
-\rysunek{iRegatta}
-{iRegatta Pro \label{fig:iRegatta}}
-{https://play.google.com/store/apps/details?id=dk.letscreate.aRegatta}
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=1.0]{graphic/iRegatta}
+    \caption{\textit{iRegatta}}
+    \source{https://play.google.com/store/apps/details?id=dk.letscreate.aRegatta}
+    \label{fig:iRegatta}
+\end{figure}
 
-\rysunek{Seapilot}
-{Seapilot \label{fig:Seapilot}}
-{https://play.google.com/store/apps/details?id=com.seapilot.android} 
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.3]{graphic/Seapilot}
+    \caption{\textit{Seapilot}}
+    \source{https://play.google.com/store/apps/details?id=com.seapilot.android}
+    \label{fig:Seapilot}
+\end{figure}
 
-\rysunek{NMEAremote}
-{NMEAremote \label{fig:NMEAremote}}
-{https://apps.apple.com/us/app/nmearemote/id412806204} 
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.3]{graphic/NMEAremote}
+    \caption\textit{{NMEAremote}}
+    \source{https://apps.apple.com/us/app/nmearemote/id412806204}
+    \label{fig:NMEAremote}
+\end{figure}
 
 \section{Podsumowanie}\label{chap: summary}
 
@@ -261,7 +274,7 @@ Dostępne rozwiązania nie są perfekcyjne, jednak w przybliżeniu pokrywają si
 \chapter{Aplikacja Mobilna}\label{chap:Mobile App}
 
 \section{Język programowania}\label{sec: language}
-Domena tworzenia oprogramowania jest bardzo obszerna i może być dzielona wedle różnych kryteriów. Pierwszą przychodzącą na myśl kategoryzacją jest podział ze względu na różne języki programowania, te najbardziej popularne z nich, czyli C, C++, Python, Java, C\#, JavaScript są wystarczająco odmienne, aby było to adekwatne kryterium. Innym, prawdopodobnie najbardziej szczegółowym zbiorem kryteriów są kryteria techniczne. Najważniejsze z nich to:
+Domena tworzenia oprogramowania jest bardzo obszerna i może być dzielona wedle różnych kryteriów. Pierwszą przychodzącą na myśl kategoryzacją jest podział ze względu na różne języki programowania, te najbardziej popularne z nich, czyli \textit{C}, \textit{C++}, \textit{Python}, \textit{Java}, \textit{C\#}, \textit{JavaScript} są wystarczająco odmienne, aby było to adekwatne kryterium. Innym, prawdopodobnie najbardziej szczegółowym zbiorem kryteriów są kryteria techniczne. Najważniejsze z nich to:
 \begin{enumerate}
 
 \item Sposób egzekucji (czyli sposób, w jaki wykonywany jest dany program komputerowy):
@@ -273,45 +286,43 @@ Domena tworzenia oprogramowania jest bardzo obszerna i może być dzielona wedle
 
 \item Wspierany paradygmat programowania, głównie:
 \begin{itemize}
-	\item Structural Programming (SP), czyli paradygmat, który za podstawowy element budulcowy uznaje funkcje (procedury), które są zbiorem instrukcji, które mają wpływ na stan programu. Całość jest hierarchiczna oraz sekwencyjna. Pierwszym najszerzej rozpowszechnionym, uznanym i do dzisiaj używanym językiem strukturalnym jest język C
-	\item Object Oriented Programming (OOP), czyli próba opisania oprogramowania w sposób jak najbardziej oddający otaczający nas świat. Klasy oraz obiekty stanowią warstwę abstrakcji reprezentującą dane procesy oraz podmioty. Wedle definicji możemy wymienić cztery filary programowania obiektowego: abstrakcja, hermetyzacja, polimorfizm oraz dziedziczenie. Obecnie jest to dominujący na rynku paradygmat, cechujący przede wszystkim C++, C\# i Java. Nie jest jednak pozbawiony wad oraz problemów wynikających z samych jego założeń. 
-	\item Functional Programming (FP), czyli paradygmat można rzec inspirowany matematyką. W jego podstawowych założeniach kod źródłowy składałby się z wielu przewidywalnych funkcji, nazywanych 'pure functions'. Takie funkcje muszą zawsze zwracać dokładnie taki sam rezultat przy takich samych danych wejściowych, niezależnie od jakichkolwiek innych czynników. Tak restrykcyjne założenie uniemożliwia wywoływanie jakichkolwiek efektów ubocznych (ang. side effects) w kodzie, czego najbardziej dobitnym przykładem są operacje I/O będące podstawą znakomitej części oprogramowań. Chciałbym tutaj zaznaczyć, że wbrew rozumowaniu wielu inżynierów oprogramowania, nie oznacza niemożliwości wykorzystania efektów ubocznych. W językach programowania funkcyjnego jest to w pełni możliwe, a sam paradygmat dopuszcza łamanie założeń w niezbędnych operacjach. Programowanie funkcyjne posiada wysoki próg wejścia, może wydawać się nieintuicyjne i skomplikowane oraz przestarzałe. Zyskuje jednak ponownie na popularności, powoli stając się konkurentem dla programowania obiektowego. Przykładowe języki reprezentujące ten paradygmat to Haskell, Lisp.
+	\item Structural Programming (SP), czyli paradygmat, który za podstawowy element budulcowy uznaje funkcje (procedury), które są zbiorem instrukcji, które mają wpływ na stan programu. Całość jest hierarchiczna oraz sekwencyjna. Pierwszym najszerzej rozpowszechnionym, uznanym i do dzisiaj używanym językiem strukturalnym jest język \textit{C}
+	\item Object Oriented Programming (OOP), czyli próba opisania oprogramowania w sposób jak najbardziej oddający otaczający nas świat. Klasy oraz obiekty stanowią warstwę abstrakcji reprezentującą dane procesy oraz podmioty. Wedle definicji możemy wymienić cztery filary programowania obiektowego: abstrakcja, hermetyzacja, polimorfizm oraz dziedziczenie. Obecnie jest to dominujący na rynku paradygmat, cechujący przede wszystkim \textit{C++}, \textit{C\#} i \textit{Java}. Nie jest jednak pozbawiony wad oraz problemów wynikających z samych jego założeń. 
+	\item Functional Programming (FP), czyli paradygmat można rzec inspirowany matematyką. W jego podstawowych założeniach kod źródłowy składałby się z wielu przewidywalnych funkcji, nazywanych 'pure functions'. Takie funkcje muszą zawsze zwracać dokładnie taki sam rezultat przy takich samych danych wejściowych, niezależnie od jakichkolwiek innych czynników. Tak restrykcyjne założenie uniemożliwia wywoływanie jakichkolwiek efektów ubocznych (ang. side effects) w kodzie, czego najbardziej dobitnym przykładem są operacje I/O będące podstawą znakomitej części oprogramowań. Chciałbym tutaj zaznaczyć, że wbrew rozumowaniu wielu inżynierów oprogramowania, nie oznacza niemożliwości wykorzystania efektów ubocznych. W językach programowania funkcyjnego jest to w pełni możliwe, a sam paradygmat dopuszcza łamanie założeń w niezbędnych operacjach. Programowanie funkcyjne posiada wysoki próg wejścia, może wydawać się nieintuicyjne i skomplikowane oraz przestarzałe. Zyskuje jednak ponownie na popularności, powoli stając się konkurentem dla programowania obiektowego. Przykładowe języki reprezentujące ten paradygmat to \textit{Haskell}, \textit{Lisp}.
 \end{itemize}  
 
 \item Typowanie:
 \begin{itemize}
-	\item Statyczne, inaczej zwane twardo typowanym, języki tego typu wymagają od programisty znajomości i deklaracji typów danych. Cechujące wszystkie najstarsze 
-	%znaleźć lepsze słowo, chodzi o to, że na początku istniały tylko twardo typowane języki i nikt nie myślał, że może być inaczej%
-	 języki programowania, a także większość obecnie używanych. Zapewnia możliwość znalezienia błędów ludzkich na poziomie kompilacji, czyli bez konieczności uruchamiania i sprawdzania oprogramowania. Przykładowe języki: C, C++, Java, C\#
-	 \item Dynamiczne, inaczej zwane miękko typowanym, języki tego typu nie posiadają oznaczeń typów danych, takich jak np. 'string' czy 'float', lub nie wymagają jawnego ich podawania. Zaletą takiej konwencji jest mniejsza ilość kodu oraz większa przystępność dla początkujących programistów. Przykładowe języki: Python, JavaScript. 
+	\item Statyczne, inaczej zwane twardo typowanym, języki tego typu wymagają od programisty znajomości i deklaracji typów danych. Cechujące wszystkie najstarsze języki programowania, a także większość obecnie używanych. Zapewnia możliwość znalezienia błędów ludzkich na poziomie kompilacji, czyli bez konieczności uruchamiania i sprawdzania oprogramowania. Przykładowe języki: \textit{C}, \textit{C++}, \textit{Java}, \textit{C\#}
+	 \item Dynamiczne, inaczej zwane miękko typowanym, języki tego typu nie posiadają oznaczeń typów danych, takich jak np. 'string' czy 'float', lub nie wymagają jawnego ich podawania. Zaletą takiej konwencji jest mniejsza ilość kodu oraz większa przystępność dla początkujących programistów. Przykładowe języki: \textit{Python}, \textit{JavaScript}. 
 
 \end{itemize}
 
 \end{enumerate} 
-Kolejnym logicznym kryterium jest docelowa platforma, dzięki czemu wyróżnimy programowanie wbudowane, web'owe, desktop'owe, mobilne. Należy zauważyć, że w tym wypadku niektóre z wyżej wymienionych języków trafią do wspólnego zbioru. Dla przykładu zarówno Python jak i JavaScript można nazwać językami web'owymi (lecz nie tylko). Pojawia się tutaj pewien problem, którym jest skalowanie oprogramowania. Jeśli firma posiada obiecujące oprogramowanie to ograniczenie grona odbiorców do danej platformy jest bardzo niekorzystne. Z między innymi tego powodu, języki programowania ewoluowały stając się wieloplatformowe. Dla przykładu Java, będąca jednym z najpopularniejszych języków na rynku, została stworzona z założeniem wsparcia różnych platform bez potrzeby ingerowania w kod. 
+Kolejnym logicznym kryterium jest docelowa platforma, dzięki czemu wyróżnimy programowanie wbudowane, web'owe, desktop'owe, mobilne. Należy zauważyć, że w tym wypadku niektóre z wyżej wymienionych języków trafią do wspólnego zbioru. Dla przykładu zarówno \textit{Python} jak i \textit{JavaScript} można nazwać językami web'owymi (lecz nie tylko). Pojawia się tutaj pewien problem, którym jest skalowanie oprogramowania. Jeśli firma posiada obiecujące oprogramowanie to ograniczenie grona odbiorców do danej platformy jest bardzo niekorzystne. Z między innymi tego powodu, języki programowania ewoluowały stając się wieloplatformowe. Dla przykładu \textit{Java}, będąca jednym z najpopularniejszych języków na rynku, została stworzona z założeniem wsparcia różnych platform bez potrzeby ingerowania w kod. 
 
-Wyżej wymienione kryteria mają olbrzymie znaczenie podczas wyboru języka dla danego projektu. W przypadku aplikacji będącej podmiotem pracy inżynierskiej zdecydowano się na TypeScript, czyli nadzbiór języka JavaScript. Podobnie jak JavaScript wspiera on zarówno programowanie funkcyjne jak i obiektowe. Natomiast najistotniejszymi różnicami są kompilacja oraz wsparcie dla twardego typowania. Kompilowany jest on do czystego JavaScriptu, który następnie interpretowany jest przez środowisko klienckie, czyli np. node.js lub przeglądarka internetowa. Dzięki temu w przypadku, gdy nie jesteśmy w stanie lub nie chcemy określać typu danych - jest to całkowicie dozwolone. Przykładowo - dane dostarczane z zewnętrznej biblioteki, której twórca nie zapewnia ich struktury. W przypadku niektórych frameworków wymuszone jest użycie języka TypeScript, w innych jest to opcjonalne. Przykładowo jeden z najpopularniejszych frameworków do tworzenia GUI o nazwie Angular wymusza używanie tej technologii. Podobnie jak zyskujący coraz większą popularność NestJS, służący do tworzenia aplikacji serwerowych. Po wybraniu języka programowania przychodzi czas na wybór frameworka, który usprawni pracę.
+Wyżej wymienione kryteria mają olbrzymie znaczenie podczas wyboru języka dla danego projektu. W przypadku aplikacji będącej podmiotem pracy inżynierskiej zdecydowano się na \textit{TypeScript}, czyli nadzbiór języka \textit{JavaScript}. Podobnie jak \textit{JavaScript} wspiera on zarówno programowanie funkcyjne jak i obiektowe. Natomiast najistotniejszymi różnicami są kompilacja oraz wsparcie dla twardego typowania. Kompilowany jest on do czystego \textit{JavaScript}, który następnie interpretowany jest przez środowisko klienckie, czyli np. \textit{node.js} lub przeglądarka internetowa. Dzięki temu w przypadku, gdy nie jesteśmy w stanie lub nie chcemy określać typu danych - jest to całkowicie dozwolone. Przykładowo - dane dostarczane z zewnętrznej biblioteki, której twórca nie zapewnia ich struktury. W przypadku niektórych frameworków wymuszone jest użycie języka \textit{TypeScript}, w innych jest to opcjonalne. Przykładowo jeden z najpopularniejszych frameworków do tworzenia \textit{GUI} o nazwie \textit{Angular} wymusza używanie tej technologii. Podobnie jak zyskujący coraz większą popularność \textit{NestJS}, służący do tworzenia aplikacji serwerowych. Po wybraniu języka programowania przychodzi czas na wybór frameworka, który usprawni pracę.
 
 \section{Framework}\label{sec: framework}
 
-Framework dostarcza programiście szkielet aplikacji, a także metody, komponenty, serwisy oraz składnię do ich wykorzystywania. Wedle statystyki przedstawionej na ~Rysunek~\ref{fig:Frameworks_statictics} najpopularniejszym z frameworków do tworzenia aplikacji webowych po stronie klienta jest ReactJs, konkurujący z frameworkami nazwanymi Angular oraz Vue. Nie udostępnia on jednak możliwości tworzenia natywnych aplikacji mobilnych na systemy Android oraz iOS. Na te potrzeby powstał ReactNative. Jest to odpowiednik wspomnianego ReactJs dedykowany dla platform mobilnych. Podstawowe założenia takie jak kompozycja komponentów, przesyłanie danych, czy cykl życia komponentu pozostają bez zmian. Znaczące różnice wynikają z faktu, że w odróżnieniu do przeglądarek, aplikacje mobilne nie wspierają składni HTML oraz CSS. W miejsce pierwszego ReactNative dostarcza podstawowe komponenty pozwalające na budowanie widoku. Odpowiednikiem elementu <div /> w składni HTML jest w tym wypadku element <View />. Olbrzymią zaletą tego frameworka jest fakt, że w podanym przykładzie element <View /> zostanie wyrenderowany przy użyciu natywnego API platformy, co zapewnia dużo lepszą wydajność w porównaniu do przykładowo frameworku Cordowa, który do renderowania wykorzystuje WebView. ~Rysunek~\ref{fig:react-native} Arkuszy Styli CSS zastąpione są natomiast przez obiekty Stylesheets. Zaletą takiego podejścia jest możliwość przeniesienia aplikacji napisanej w ReactNative na ReactJS przy stosunkowo niewielkim nakładzie pracy, gdyż znaczna część kodu może zostać użyta ponownie.
-Dodatkowo został wykorzystany framework oraz platforma Expo. Jest to zbiór narzędzi oraz serwisów zbudowanych wokół ReactNative, mający na celu przyspieszenie procesu tworzenia aplikacji. Dostarcza on między innymi przydatne warstwy abstrakcji nałożone na natywne API, przykładowo dostęp do kamery, czy żyroskopu. Dodatkowo zapewnia rozbudowane CLI (Command Line Interface). Jedną z jego możliwości jest niezwykle proste budowanie kodu na określoną platformę oraz serwer deweloperski z funkcją 'hot-reload'. Oznacza to, że zapisanie zmiany w kodzie natychmiast wywoła proces budowy odpowiednich plików, a programista ma możliwość obserwowania zmian na bieżąco używając symulatora urządzenia mobilnego lub rzeczywistego urządzenia. Sam proces połączenia z serwerem deweloperskim jest niesłychanie prosty. Expo dostarcza adres url zawierający pliki źródłowe. Dla ułatwienia jest on również przedstawiony jak kod QR. Dowolne urządzenie mobilne posiadające aplikację kliencką Expo po zeskanowaniu tego kodu uruchomi wersję deweloperską aplikacji. ~Rysunek~\ref{fig:expo} Oczywiście takie udogodnienia nakładają pewne ograniczenia, przez co dla dużych projektów z rozbudowaną logiką biznesową Expo może okazać się niewłaściwym wyborem. Jednak analiza pod kątem potrzeb omawianej pracy pozwoliła na uzasadniony wybór tego narzędzia.
+Framework dostarcza programiście szkielet aplikacji, a także metody, komponenty, serwisy oraz składnię do ich wykorzystywania. Wedle statystyki przedstawionej na ~Rysunek~\ref{fig:Frameworks_statictics} \cite{FrameworksPopularity} najpopularniejszym z frameworków do tworzenia aplikacji webowych po stronie klienta jest \textit{ReactJs}, konkurujący z frameworkami nazwanymi \textit{Angular} oraz \textit{Vue}. Nie udostępnia on jednak możliwości tworzenia natywnych aplikacji mobilnych na systemy \textit{Android} oraz \textit{iOS}. Na te potrzeby powstał \textit{ReactNative}. Jest to odpowiednik wspomnianego \textit{ReactJs} dedykowany dla platform mobilnych. Podstawowe założenia takie jak kompozycja komponentów, przesyłanie danych, czy cykl życia komponentu pozostają bez zmian. Znaczące różnice wynikają z faktu, że w odróżnieniu do przeglądarek, aplikacje mobilne nie wspierają składni \textit{HTML} oraz \textit{CSS}. Na podstawie \cite{ReactNative} w miejsce pierwszego \textit{ReactNative} dostarcza podstawowe komponenty pozwalające na budowanie widoku. Odpowiednikiem elementu \textit{<div />} w składni \textit{HTML} jest w tym wypadku element \textit{<View />}. Olbrzymią zaletą tego frameworka jest fakt, że w podanym przykładzie element \textit{<View />} zostanie wyrenderowany przy użyciu natywnego \textit{API} platformy, co zapewnia dużo lepszą wydajność w porównaniu do przykładowo frameworku\textit{Cordowa}, który do renderowania wykorzystuje \textit{WebView}. ~Rysunek~\ref{fig:react-native} Arkuszy Styli \textit{CSS} zastąpione są natomiast przez obiekty \textit{Stylesheets}. Zaletą takiego podejścia jest możliwość przeniesienia aplikacji napisanej w \textit{ReactNative} na \textit{ReactJS} przy stosunkowo niewielkim nakładzie pracy, gdyż znaczna część kodu może zostać użyta ponownie. 
+Dodatkowo został wykorzystany framework oraz platforma \textit{Expo}. Wedle \cite{Expo} jest to zbiór narzędzi oraz serwisów zbudowanych wokół \textit{ReactNative}, mający na celu przyspieszenie procesu tworzenia aplikacji. Dostarcza on między innymi przydatne warstwy abstrakcji nałożone na natywne \textit{API}, przykładowo dostęp do kamery, czy żyroskopu. Dodatkowo zapewnia rozbudowane \textit{CLI} (Command Line Interface). Jedną z jego możliwości jest niezwykle proste budowanie kodu na określoną platformę oraz serwer deweloperski z funkcją 'hot-reload'. Oznacza to, że zapisanie zmiany w kodzie natychmiast wywoła proces budowy odpowiednich plików, a programista ma możliwość obserwowania zmian na bieżąco używając symulatora urządzenia mobilnego lub rzeczywistego urządzenia. Sam proces połączenia z serwerem deweloperskim jest niesłychanie prosty. \textit{Expo} dostarcza adres url zawierający pliki źródłowe. Dla ułatwienia jest on również przedstawiony jak kod QR. Dowolne urządzenie mobilne posiadające aplikację kliencką \textit{Expo} po zeskanowaniu tego kodu uruchomi wersję deweloperską aplikacji. ~Rysunek~\ref{fig:expo} Oczywiście takie udogodnienia nakładają pewne ograniczenia, przez co dla dużych projektów z rozbudowaną logiką biznesową Expo może okazać się niewłaściwym wyborem. Jednak analiza pod kątem potrzeb omawianej pracy pozwoliła na uzasadniony wybór tego narzędzia.
 
 \rysunek{cross-platform}
-{Przekształcenia kodu ReactNative na natywne API platformy \label{fig:react-native}}
+{Przekształcenia kodu \textit{ReactNative} na natywne API platformy \label{fig:react-native}}
 {https://reactnative.dev/}
 
 \rysunek{fetch-app-from-xde}
-{Schemat działania Expo lokalnie \label{fig:expo}}
+{Schemat lokalnego działania \textit{Expo} \label{fig:expo}}
 {https://docs.expo.io/versions/v36.0.0/workflow/how-expo-works}
 
 \rysunek{Frameworks_statictics}
-{Popularność frameworków JavaScript \label{fig:Frameworks_statictics}}
+{Popularność frameworków \textit{JavaScript} \label{fig:Frameworks_statictics}}
 {https://gist.github.com/tkrotoff/b1caa4c3a185629299ec234d2314e190}
 
 \section{Narzędzia wspomagające}\label{sec: tools}
 
-JavaScript jest niezwykle dynamicznie rozwijającym się językiem, co sprawia że wiele środowisk nie wspiera najnowszej składni. Aby rozwiązać ten problem skorzystano z transpilera Babel. Przekształca on najnowszą składnię języka na wspierany przez środowisko odpowiednik. Dzięki temu rozwiązaniu programista może korzystać z wszelkich udogodnień wprowadzonych wraz z kolejnymi wersjami języka nie martwiąc się przy tym o wsparcie starszych platform. Narzędzie to posiada wsparcie dla TypeScript'u oraz składni ReactNative.  
+\textit{JavaScript} jest niezwykle dynamicznie rozwijającym się językiem, co sprawia że wiele środowisk nie wspiera najnowszej składni. Aby rozwiązać ten problem skorzystano z transpilera \textit{Babel}. Przekształca on najnowszą składnię języka na wspierany przez środowisko odpowiednik. Dzięki temu rozwiązaniu programista może korzystać z wszelkich udogodnień wprowadzonych wraz z kolejnymi wersjami języka nie martwiąc się przy tym o wsparcie starszych platform. Zgodnie z \cite{Babel} narzędzie to posiada wsparcie dla \textit{TypeScript} oraz składni \textit{ReactNative}.  
 \code{Babel - przykładowe transformacje kodu}
 {Opracowanie własne}{\label{code: babel}}
 \begin{lstlisting}[language=JavaScript]
@@ -375,11 +386,11 @@ module.exports = function(api) {
 };
 \end{lstlisting}
 
-Dla zachowania standardów jakości oraz jednolitego stylu kodu zostało wykorzystane narzędzie do analizy statycznej. Za powszechny standard uznaje się oprogramowanie ESLint. Zapewnia ono olbrzymią ilość konfigurowalnych zasad, dotyczących zarówno stylu kodu takich jak maksymalna długość linii czy sposób indentacji, jak i jego logiki. Warto wspomnieć, że narzędzie to posiada wsparcie najpopularniejszych środowisk programistycznych. W przypadku języka JavaScript/TypeScript są to Visual Studio Code, WebStorm, IntelliJ IDEA. Dzięki temu błędy wykrywane są automatycznie podczas pisania kodu. W przypadku projektów komercyjnych tworzonych przez zespół programistów częstą praktyką jest tworzenie tak zwanych 'git hooków', które mają na celu sprawdzenie kodu przez między innymi linter przed utworzeniem commita, a w przypadku błędów uniemożliwienie go. Omawiany projekt korzysta ze zbioru zasad dostarczonego przez firmę Airbnb skonfigurowanych wedle osobistych preferencji.
+Dla zachowania standardów jakości oraz jednolitego stylu kodu zostało wykorzystane narzędzie do analizy statycznej. Za powszechny standard uznaje się oprogramowanie \textit{ESLint}. Zapewnia ono olbrzymią ilość konfigurowalnych zasad, dotyczących zarówno stylu kodu takich jak maksymalna długość linii czy sposób indentacji, jak i jego logiki. Warto wspomnieć, że narzędzie to posiada wsparcie najpopularniejszych środowisk programistycznych. W przypadku języka \textit{JavaScript/TypeScript} są to \textit{Visual Studio Code}, \textit{WebStorm}, \textit{IntelliJ IDEA}. Dzięki temu błędy wykrywane są automatycznie podczas pisania kodu. W przypadku projektów komercyjnych tworzonych przez zespół programistów częstą praktyką jest tworzenie tak zwanych 'git hooków', które mają na celu sprawdzenie kodu przez między innymi linter przed utworzeniem commita, a w przypadku błędów uniemożliwienie go. Omawiany projekt korzysta ze zbioru zasad dostarczonego przez firmę \textit{Airbnb} skonfigurowanych wedle osobistych preferencji.
 
 \section{Komunikacja z serwerem}\label{sec: server communication} 
-Sposób komunikacji z serwisami sieciowymi zależy od typu API danego serwisu. Najczęściej spotykamy się z REST API opartymi na protokole http. Taki serwis opierania się na schemacie, w którym klient wysyła zapytanie i oczekuje na odpowiedź. Zapytanie http w momencie wywołania otwiera połączenie, a po przesłaniu odpowiedzi lub określonym (krótkim) czasie je zamyka. Ciągłe otwieranie i zamykanie połączenia jest olbrzymim problemem dla aplikacji wymagających stałej aktualizacji danych. W przypadku systemu wizualizującego możliwie aktualny stan modułów konieczna jest ciągła aktualizacja danych. Dla takich potrzeb wykorzystywany jest protokół WebSocket, umożliwiający otworzenie połączenia między serwerem a klientem oraz komunikację w obie strony. Dzięki temu klient jest w stanie nasłuchiwać dostarczanych wiadomości bez konieczności tworzenia i wysyłania zapytania. Korzystając z tego samego połączenia klient ma możliwość wysłania wiadomości do serwera. Wymienione cechy czynią protokół WebSocket idealnym wyborem dla aplikacji wymagającej możliwie najbardziej aktualnych danych. Wykorzystany do testów NNMEA Simulator zapewnia funkcję serwera tego typu. Klient nie posiada konieczności wysyłania informacji do nadawcy, obsługuje jedynie ich odbiór. Wiersze od siódmego do dziewiątego (kod źródłowy~\ref{code: connectWebsocket}) zawierają implementację uchytwu (ang. handler) obsługującego odbiór wiadomości.
-\code{Metoda tworząca połączenie WebSocket}
+Sposób komunikacji z serwisami sieciowymi zależy od typu \textit{API} danego serwisu. Najczęściej spotykamy się z \textit{REST API} opartymi na protokole http. Taki serwis opierania się na schemacie, w którym klient wysyła zapytanie i oczekuje na odpowiedź. Zapytanie http w momencie wywołania otwiera połączenie, a po przesłaniu odpowiedzi lub określonym (krótkim) czasie je zamyka. Ciągłe otwieranie i zamykanie połączenia jest olbrzymim problemem dla aplikacji wymagających stałej aktualizacji danych. W przypadku systemu wizualizującego możliwie aktualny stan modułów konieczna jest ciągła aktualizacja danych. Dla takich potrzeb wykorzystywany jest protokół \textit{WebSocket}, umożliwiający otworzenie połączenia między serwerem a klientem oraz komunikację w obie strony. Dzięki temu klient jest w stanie nasłuchiwać dostarczanych wiadomości bez konieczności tworzenia i wysyłania zapytania. Korzystając z tego samego połączenia klient ma możliwość wysłania wiadomości do serwera. Wymienione cechy czynią protokół \textit{WebSocket} idealnym wyborem dla aplikacji wymagającej możliwie najbardziej aktualnych danych. Wykorzystany do testów \textit{NMEA Simulator} zapewnia funkcję serwera tego typu. Klient nie posiada konieczności wysyłania informacji do nadawcy, obsługuje jedynie ich odbiór. Wiersze od siódmego do dziewiątego (kod źródłowy~\ref{code: connectWebsocket}) zawierają implementację uchytwu (ang. handler) obsługującego odbiór wiadomości.
+\code{Metoda tworząca połączenie \textit{WebSocket}}
 {Opracowanie własne}{\label{code: connectWebsocket}}
 \begin{lstlisting}[language=JavaScript]
   const connectWebsocket = useCallback(() => {
@@ -408,10 +419,10 @@ Sposób komunikacji z serwisami sieciowymi zależy od typu API danego serwisu. N
     
 \end{lstlisting}
 
-\section{Dekoder zdań NMEA}\label{sec: NMEA parser}
-Otrzymywane z serwera dane są pojedynczym stringiem zawierającym wszystkie zdania NMEA oddzielone znakiem końca linii. Pierwszym krokiem niezbędnym dalszego przetwarzania jest więc rozbicie otrzymanego ciągu znaków na tablicę zawierającą tekstową reprezentację pojedynczego zdania. Następnie dla każdego z elementów wywoływana jest metoda zwracająca obiekt reprezentujący ramkę NMEA o określonej strukturze. Dołożono wszelkich starań, aby rozwiązanie było jak najbardziej generyczne i łatwe w rozbudowie. Proces dekodowania rozpoczyna się od walidacji sumy kontrolnej zdania (wiersze od drugiego do czwartego (kod źródłowy~\ref{code: parseNmeaSentence}). W przpadku powodzenia wyodrębniane są identyfikatory nadawcy oraz zdania (wiersze jedenaście oraz dwanaście (kod źródłowy~\ref{code: parseNmeaSentence})). Na podstawie identyfikatora zdania uzyskiwany jest jego format (wiersz czternasty kod źródłowy~\ref{code: parseNmeaSentence} oraz kod źródłowy~\ref{code: SentencesFormats}). Format określa typ danych każdego pola w zdaniu, co umożliwiło stworzenie struktury określającej sposób dekodowania każdego pola (kod źródłowy ~\ref{code: parsers mapper}). Dzięki takiemu rozwiązaniu programista w łatwy sposób jest w stanie rozszerzyć obsługiwane typy pól. Posiadając informację o typach pól zawartych w zdaniu oraz o ich wartości możliwe jest stworzenie obiektu opisującego zdanie NMEA. Oznacza to także zakończenie części generycznej dla wszystkich typów zdań, gdyż format danych w poszczególnych polach nie określa ich znaczenia. Aby otrzymać w pełni wartościowe informacje należy opisać strukturę poszczególnych zdań oraz metodę przenoszącą surowe dane do właściwych pól tej struktury. Taki interfejs oraz metoda są wykorzystywane do utworzenia obiektu pakietu (wiersz dwudziesty drugi kod źródłowy ~\ref{code: parseNmeaSentence}) reprezentującego w pełni odkodowane zdanie NMEA. Przykładowy plik dla zdania DBT przedstawia kod źródłowy ~\ref{code: DBT codec}. Rozszerzenie aplikacji o kolejny typ zdania wymaga jedynie utworzenia takiego pliku oraz dodanie utworzonego interfejsu i metody do kolekcji wykorzystywanych przy parsowaniu.
+\section{Dekoder zdań \textit{NMEA}}\label{sec: NMEA parser}
+Otrzymywane z serwera dane są pojedynczym stringiem zawierającym wszystkie zdania \textit{NMEA} oddzielone znakiem końca linii. Pierwszym krokiem niezbędnym dalszego przetwarzania jest więc rozbicie otrzymanego ciągu znaków na tablicę zawierającą tekstową reprezentację pojedynczego zdania. Następnie dla każdego z elementów wywoływana jest metoda zwracająca obiekt reprezentujący ramkę \textit{NMEA} o określonej strukturze. Dołożono wszelkich starań, aby rozwiązanie było jak najbardziej generyczne i łatwe w rozbudowie. Proces dekodowania rozpoczyna się od walidacji sumy kontrolnej zdania (wiersze od drugiego do czwartego (kod źródłowy~\ref{code: parseNmeaSentence}). W przpadku powodzenia wyodrębniane są identyfikatory nadawcy oraz zdania (wiersze jedenaście oraz dwanaście (kod źródłowy~\ref{code: parseNmeaSentence})). Na podstawie identyfikatora zdania uzyskiwany jest jego format (wiersz czternasty kod źródłowy~\ref{code: parseNmeaSentence} oraz kod źródłowy~\ref{code: SentencesFormats}). Format określa typ danych każdego pola w zdaniu, co umożliwiło stworzenie struktury określającej sposób dekodowania każdego pola (kod źródłowy ~\ref{code: parsers mapper}). Dzięki takiemu rozwiązaniu programista w łatwy sposób jest w stanie rozszerzyć obsługiwane typy pól. Posiadając informację o typach pól zawartych w zdaniu oraz o ich wartości możliwe jest stworzenie obiektu opisującego zdanie \textit{NMEA}. Oznacza to także zakończenie części generycznej dla wszystkich typów zdań, gdyż format danych w poszczególnych polach nie określa ich znaczenia. Aby otrzymać w pełni wartościowe informacje należy opisać strukturę poszczególnych zdań oraz metodę przenoszącą surowe dane do właściwych pól tej struktury. Taki interfejs oraz metoda są wykorzystywane do utworzenia obiektu pakietu (wiersz dwudziesty drugi kod źródłowy ~\ref{code: parseNmeaSentence}) reprezentującego w pełni odkodowane zdanie \textit{NMEA}. Przykładowy plik dla zdania DBT przedstawia kod źródłowy ~\ref{code: DBT codec}. Rozszerzenie aplikacji o kolejny typ zdania wymaga jedynie utworzenia takiego pliku oraz dodanie utworzonego interfejsu i metody do kolekcji wykorzystywanych przy parsowaniu.
 
-\code{Metoda parsująca zdania NMEA}
+\code{Metoda parsująca zdania \textit{NMEA}}
 {Opracowanie własne}{\label{code: parseNmeaSentence}}
 \begin{lstlisting}[language=JavaScript]
 export const parseNmeaSentence = (sentence: string): Packet => {
@@ -505,18 +516,18 @@ export const decodeDBT = (fields: Array<number>): DBTPacket => ({
 \end{lstlisting}
 
 \section{Zarządzanie danymi}\label{sec: server communication}
-Uzyskane dane oczywiście należy przechowywać w aplikacji. Komponenty tworzące widok zorganizowane są w hierarchicznej strukturze. Błędnym rozwiązaniem byłoby przekazywanie danych w dół hierarchii przez wszystkie komponenty pośredniczące, gdyż dostęp do nich powinny mieć jedynie elementy je wykorzystujące. W takich sytuacjach, gdy dane muszą być dostępne dla wielu komponentów na różnych poziomach zagnieżdżenia, stosuje się globalny stan aplikacji. Dużym problemem dotyczącym zagadnienia globalnie przechowywanych informacji jest możliwość ich mutacji. JavaScript przechowuje złożone struktury danych przez referencję, co umożliwia modyfikację obiektów (kod źródłowy~\ref{code: js muttability}), które powinny pozostać stałe. Może to prowadzić do ciężkich w lokalizacji błędów. Aby tego uniknąć skorzystano z wzorca stanu. Rozbudowane projekty wykorzystują w tym celu biblioteki takie jak Redux i MobX, jednak potrzeby omawianej aplikacji nie uzasadniają ich wykorzystania. ReactNative zapewnia możliwość utworzenia kontekstu, dostępnego dla każdego komponentu w nim zagnieżdżonego. Korzystając z tej funkcjonalności utworzone zostały trzy konteksty:
+Uzyskane dane oczywiście należy przechowywać w aplikacji. Komponenty tworzące widok zorganizowane są w hierarchicznej strukturze. Błędnym rozwiązaniem byłoby przekazywanie danych w dół hierarchii przez wszystkie komponenty pośredniczące, gdyż dostęp do nich powinny mieć jedynie elementy je wykorzystujące. W takich sytuacjach, gdy dane muszą być dostępne dla wielu komponentów na różnych poziomach zagnieżdżenia, stosuje się globalny stan aplikacji. Dużym problemem dotyczącym zagadnienia globalnie przechowywanych informacji jest możliwość ich mutacji. JavaScript przechowuje złożone struktury danych przez referencję, co umożliwia modyfikację obiektów (kod źródłowy~\ref{code: js mutate}), które powinny pozostać stałe. Może to prowadzić do ciężkich w lokalizacji błędów. Aby tego uniknąć skorzystano z wzorca stanu. Rozbudowane projekty wykorzystują w tym celu biblioteki takie jak \textit{Redux} i \textit{MobX}, jednak potrzeby omawianej aplikacji nie uzasadniają ich wykorzystania. Wedle \cite{ReactNative} \textit{ReactNative} zapewnia możliwość utworzenia kontekstu, dostępnego dla każdego komponentu w nim zagnieżdżonego. Korzystając z tej funkcjonalności utworzone zostały trzy konteksty:
 
 \begin{enumerate}
- \item nmeaConnectorContext odpowiedzialny za utworzenie połączenia WebSocket, odbieranie informacji ze strony serwera oraz przechowywanie ich. 
+ \item nmeaConnectorContext odpowiedzialny za utworzenie połączenia \textit{WebSocket}, odbieranie informacji ze strony serwera oraz przechowywanie ich. 
  
- \item unitContext odpowiedzialny za sformatowane dane dotyczące zdań NMEA opisujących parametry jednostki pływającej. 
+ \item unitContext odpowiedzialny za sformatowane dane dotyczące zdań \textit{NMEA} opisujących parametry jednostki pływającej. 
  
- \item positionContext odpowiedzialny za sformatowane dane dotyczące zdań NMEA opisujących położenie jednostki pływającej. 
+ \item positionContext odpowiedzialny za sformatowane dane dotyczące zdań \textit{NMEA} opisujących położenie jednostki pływającej. 
  
 \end{enumerate}
 
-Do ich obsługi wykorzystano wzorzec stanu narzucany przez bibliotekę Redux (~Rysunek~\ref{fig:redux-flow}) Podstawowe elementy składniowe tego wzorca to:
+Do ich obsługi wykorzystano wzorzec stanu narzucany przez bibliotekę \textit{Redux} \cite{Redux, ReduxABC} (~Rysunek~\ref{fig:redux-flow}) Podstawowe elementy składniowe tego wzorca to:
 \begin{enumerate}
 
 	\item Action, czyli obiekt składający się z typu oraz ładunku (ang. payload). Każda akcja musi zostać wyemitowana poprzez wywołanie metody dispatch(action). 
@@ -542,7 +553,7 @@ Do ich obsługi wykorzystano wzorzec stanu narzucany przez bibliotekę Redux (~R
 \end{lstlisting}
 
 
-\code{Akcje kontekstu konektora NMEA}
+\code{Akcje kontekstu konektora \textit{NMEA}}
 {Opracowanie własne}{\label{code: NMEA actions}}
 \begin{lstlisting}[language=JavaScript]
 export const NmeaConnectorActions = {
@@ -555,7 +566,7 @@ export type NmeaConnectorActions = ActionsUnion<typeof NmeaConnectorActions>;
 
 \end{lstlisting}
 
-\code{Funkcja reducera dla konektora NMEA}
+\code{Funkcja reducera dla konektora \textit{NMEA}}
 {Opracowanie własne}{\label{code: NMEA reducer}}
 \begin{lstlisting}[language=JavaScript]
 const nmeaReducer = (state: INmeaConnectorState, action: NmeaConnectorActions): INmeaConnectorState => {
@@ -576,7 +587,7 @@ const nmeaReducer = (state: INmeaConnectorState, action: NmeaConnectorActions): 
 };
 \end{lstlisting}
 
-Dzięki takiemu rozwiązaniu warstwa abstrakcji definiująca strukturę globalnych danych oraz przebieg ich zmian oddzielona jest od warstwy widoku. Dane dostarczane przez konteksty są konsumowane przez zależne od nich komponenty. W tym celu utworzono tak zwane 'hooki'. Jest to wzorzec wprowadzony przez twórców biblioteki React oraz frameworka ReactNative, określający metody pozwalające na skorzystanie z wewnętrznego stanu oraz cyklu życia komponentu w ciele funkcji. Wspomniane metody dostarczane są przez framework, a ich cechą charakterystyczną jest przedrostek 'use' występujący na początku każdej funkcji (przykładowo 'useState', 'useEffect').  Docelowym zamysłem twórców jest wykorzystanie ich do tworzenia własnych 'hooków' będących funkcjami zawierającymi współdzieloną logikę. Taką logiką w omawianej aplikacji jest użycie kontekstów. Każdy z nich zbudowany jest przy użyciu natywnych  'useContext' oraz 'useReducer'. Użycie pierwszego z nich przedstawia wiersz dwudziesty czwarty  kod źródłowy ~\ref{code: position context}, gdzie 'PositionContext' zdefiniowany jest w wierszu dwunastym ~\ref{code: position context}. Wykorzystanie 'useReducer' przedstawia wiersz piętnasty ~\ref{code: position context}. Zwraca on obiekt stanu oraz metodę 'dispatch' służące do odczytu stanu oraz emisji akcji. Wiersze od dwudziestego trzeciego do dwudziestego dziewiątego ~\ref{code: position context} zawierają definicję własnego hooka.
+Dzięki takiemu rozwiązaniu warstwa abstrakcji definiująca strukturę globalnych danych oraz przebieg ich zmian oddzielona jest od warstwy widoku. Dane dostarczane przez konteksty są konsumowane przez zależne od nich komponenty. W tym celu utworzono tak zwane 'hooki' \cite{React}. Jest to wzorzec wprowadzony przez twórców biblioteki \textit{React} oraz frameworka \textit{ReactNative}, określający metody pozwalające na skorzystanie z wewnętrznego stanu oraz cyklu życia komponentu w ciele funkcji. Wspomniane metody dostarczane są przez framework, a ich cechą charakterystyczną jest przedrostek 'use' występujący na początku każdej funkcji (przykładowo 'useState', 'useEffect').  Docelowym zamysłem twórców jest wykorzystanie ich do tworzenia własnych 'hooków' będących funkcjami zawierającymi współdzieloną logikę. Taką logiką w omawianej aplikacji jest użycie kontekstów. Każdy z nich zbudowany jest przy użyciu natywnych  'useContext' oraz 'useReducer'. Użycie pierwszego z nich przedstawia wiersz dwudziesty czwarty  kod źródłowy ~\ref{code: position context}, gdzie 'PositionContext' zdefiniowany jest w wierszu dwunastym ~\ref{code: position context}. Wykorzystanie 'useReducer' przedstawia wiersz piętnasty ~\ref{code: position context}. Zwraca on obiekt stanu oraz metodę 'dispatch' służące do odczytu stanu oraz emisji akcji. Wiersze od dwudziestego trzeciego do dwudziestego dziewiątego ~\ref{code: position context} zawierają definicję własnego hooka.
    
 \code{Definicja kontekstu oraz hooka pozycji jednostki}
 {Opracowanie własne}{\label{code: position context}}
@@ -664,7 +675,7 @@ Konteksty dotyczące jednostki oraz pozycji zawierają sformatowane zdania (wier
 
 \section{Graphial User Interface (GUI)}\label{sec: GUI}
 
-	Ostatnią składową aplikacji jest warstwa widoku. W przypadku projektów opartych na ReactNative składa się ona z hierarchicznej struktury komponentów. Dane przekazywane są z góry na dół, a każdy komponent może również posiadać własny stan wewnętrzny. Zmiana otrzymanych wartości lub wspomnianego stanu powoduje przerenderowanie komponentu. Dla zapewnienia odpowiedniej wydajności wykorzystywany jest koncept o nazwie Virtual DOM. Jest to odzwierciedlenie rzeczywistego DOM (Document Object Model) przechowywane w pamięci. Ich synchronizacja określona jest mianem procesu rekonsilacji, podczas którego porównywane są obydwa modele. Elementy, w których zostały wykryte zmiany zostają utworzone ponownie. Do tworzenia elementów ReactNative wykorzystuje silnik renderujący zależny od platformy, na której została uruchomiona aplikacja. Teoretycznie możliwe jest dzięki temu rozszerzenie framework'u o wsparcie dla dowolnej platformy, dla której jesteśmy w stanie zapewnić silnik renderujący. ~Rysunek~\ref{fig:react-native-renderer}).
+	Ostatnią składową aplikacji jest warstwa widoku. W przypadku projektów opartych na \textit{ReactNative} składa się ona z hierarchicznej struktury komponentów. Dane przekazywane są z góry na dół, a każdy komponent może również posiadać własny stan wewnętrzny. Zmiana otrzymanych wartości lub wspomnianego stanu powoduje przerenderowanie komponentu. Dla zapewnienia odpowiedniej wydajności wykorzystywany jest koncept o nazwie \textit{Virtual DOM}. Wedle \cite{React} jest to odzwierciedlenie rzeczywistego \textit{DOM (Document Object Model)} przechowywane w pamięci. Ich synchronizacja określona jest mianem procesu rekonsilacji, podczas którego porównywane są obydwa modele. Elementy, w których zostały wykryte zmiany zostają utworzone ponownie. Do tworzenia elementów ReactNative wykorzystuje silnik renderujący zależny od platformy, na której została uruchomiona aplikacja. Teoretycznie możliwe jest dzięki temu rozszerzenie framework'u o wsparcie dla dowolnej platformy, dla której jesteśmy w stanie zapewnić silnik renderujący \cite{ReactNativeRenderers}. ~Rysunek~\ref{fig:react-native-renderer}).
 	
 \rysunek{react-native-renderer}
 {ReactNative render \label{fig:react-native-renderer}}
@@ -677,27 +688,64 @@ Konteksty dotyczące jednostki oraz pozycji zawierają sformatowane zdania (wier
 
 \item Navigator otrzymujący dane przekazane przez komponent MainView. Odpowiada on za rozgałęzienie hierarchii komponentów na poszczególne widoki oraz przechowywanie niezbędnych dla nich danych. W zależności od jego stanu renderowany jest odpowiedni z kolejnych wypunktowanych komponentów.
 
-\item MapView odpowiedzialny za stworzenie mapy przy wykorzystaniu API firmy Google  . Komponent ten nanosi jednostkę na mapę oraz przemieszcza widoczny obszar wraz z ruchem jednostki. Dodatkowo wyznacza na mapie linię obrazującą przebytą drogę. W przypadku interakcji użytkownika w postaci przesunięcia, obrócenia lub przybliżenia/oddalenia mapy funkcjonalność śledzenia jednostki zostaje wyłączona. Dzięki temu zabiegowi doświadczenia użytkownika zbliżone są do zapewnianych przez mobilną aplikację Google Maps. Za wycentrowanie ekranu na jednostce oraz przywrócenie funkcji podążania odpowiedzialny jest przycisk umieszczony w dolnej części ekranu. Przy wykorzystaniu kontekstu pozycji w lewej dolnej części ekranu przedstawione są aktualne dane na temat położenia geograficznego. Widok ten wykorzystuje również kontekst jednostki, aby uzyskać informację o kącie skierowania. Na jej podstawie obracana jest ikonka statku reprezentująca obiekt.
+\item MapView ~Rysunek~\ref{fig:MapView} odpowiedzialny za stworzenie mapy przy wykorzystaniu API firmy Google  . Komponent ten nanosi jednostkę na mapę oraz przemieszcza widoczny obszar wraz z ruchem jednostki. Dodatkowo wyznacza na mapie linię obrazującą przebytą drogę. W przypadku interakcji użytkownika w postaci przesunięcia, obrócenia lub przybliżenia/oddalenia mapy funkcjonalność śledzenia jednostki zostaje wyłączona. Dzięki temu zabiegowi doświadczenia użytkownika zbliżone są do zapewnianych przez mobilną aplikację Google Maps. Za wycentrowanie ekranu na jednostce oraz przywrócenie funkcji podążania odpowiedzialny jest przycisk umieszczony w dolnej części ekranu. Przy wykorzystaniu kontekstu pozycji w lewej dolnej części ekranu przedstawione są aktualne dane na temat położenia geograficznego. Widok ten wykorzystuje również kontekst jednostki, aby uzyskać informację o kącie skierowania. Na jej podstawie obracana jest ikonka statku reprezentująca obiekt.
 
-\item UnitView odpowiedzialny za stworzenie rozwijalnych kart reprezentujących poszczególne zdania NMEA. Przeprowadzany jest w nim proces iteracji po wszystkich elementach zawartych w kontekstach jednostki oraz pozycji. Dla każdego z nich tworzy komponent FrameItem, który otrzymuje informacje dotyczące konkretnego zdania. Przy użyciu wewnętrznego stanu określana jest ilość widocznych informacji. Domyślnie przedstawia on identyfikator zdania oraz jego deskryptor. W odpowiedzi na dotknięcie ekranu przez użytkownika komponent renderuje pozostałe informacje reprezentujące wszystkie pola zawarte w danym zdaniu oraz ich wartości. Ponowna interakcja użytkownika na tym samym elemencie powoduje ukrycie wspomnianych danych.
+\item UnitView ~Rysunek~\ref{fig:UnitView} odpowiedzialny za stworzenie rozwijalnych kart reprezentujących poszczególne zdania NMEA. Przeprowadzany jest w nim proces iteracji po wszystkich elementach zawartych w kontekstach jednostki oraz pozycji. Dla każdego z nich tworzy komponent FrameItem, który otrzymuje informacje dotyczące konkretnego zdania. Przy użyciu wewnętrznego stanu określana jest ilość widocznych informacji. Domyślnie przedstawia on identyfikator zdania oraz jego deskryptor. W odpowiedzi na dotknięcie ekranu przez użytkownika komponent renderuje pozostałe informacje reprezentujące wszystkie pola zawarte w danym zdaniu oraz ich wartości. Ponowna interakcja użytkownika na tym samym elemencie powoduje ukrycie wspomnianych danych.
 
-\item SettingsView odpowiedzialny za zarządzanie ustawieniami aplikacji. Dla omawianej aplikacji jedynym konfigurowalnym ustawieniem jest adres serwera WebSocket. Komponent ten przedstawia aktualny adres oraz stan połączenia. Zmiana adresu skutkuje próbą utworzenia połączenia. Udane nawiązanie powoduje zmianę tekstowej reprezentacji połączenia (zielony napis "CONNECTED" lub czerwony "DISCONNECTED") dzięki czemu użytkownik nie jest zmuszony do zmiany widoku w celu weryfikacji. 
+\item SettingsView ~Rysunek~\ref{fig:SettingsView} odpowiedzialny za zarządzanie ustawieniami aplikacji. Dla omawianej aplikacji jedynym konfigurowalnym ustawieniem jest adres serwera WebSocket. Komponent ten przedstawia aktualny adres oraz stan połączenia. Zmiana adresu skutkuje próbą utworzenia połączenia. Udane nawiązanie powoduje zmianę tekstowej reprezentacji połączenia (zielony napis "CONNECTED" lub czerwony "DISCONNECTED") dzięki czemu użytkownik nie jest zmuszony do zmiany widoku w celu weryfikacji. 
 	 
 \end{enumerate}
 
-	Taki podział komponentów pozwala na intuicyjne odczytywanie danych dotyczących położenia, dzięki wykorzystaniu map Google, oraz dokładnych odczytów poszczególnych składowych zdań NMEA. Każdy nowy format dodany do aplikacji poprzez stworzenie odpowiedniego pliku kodeka automatycznie zostanie odzwierciedlony w UnitView o ile dane otrzymywane przez aplikację takie zdanie zawierają. Dzięki temu interfejs użytkownika jest łatwo rozwijalny. 
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.2]{graphic/MapView}
+    \caption{MapView}
+    \source{Opracowanie własne}
+    \label{fig:MapView}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.2]{graphic/UnitView}
+    \caption{UnitView}
+    \source{Opracowanie własne}
+    \label{fig:UnitView}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.2]{graphic/Settings}
+    \caption{SettingsView}
+    \source{Opracowanie własne}
+    \label{fig:SettingsView}
+\end{figure}
+
+%\rysunek{MapView}
+%{MapView \label{fig:MapView}}
+%{Opracowanie własne}
+%
+%\rysunek{UnitView}
+%{UnitView \label{fig:UnitView}}
+%{Opracowanie własne}
+%
+%\rysunek{Settings}
+%{Settings \label{fig:SettingsView}}
+%{Opracowanie własne}
+
+	Taki podział komponentów pozwala na intuicyjne odczytywanie danych dotyczących położenia, dzięki wykorzystaniu map Google, oraz dokładnych odczytów poszczególnych składowych zdań \textit{NMEA}. Każdy nowy format dodany do aplikacji poprzez stworzenie odpowiedniego pliku kodeka automatycznie zostanie odzwierciedlony w UnitView o ile dane otrzymywane przez aplikację takie zdanie zawierają. Dzięki temu interfejs użytkownika jest łatwo rozwijalny.
 
 % reconsilation, virtual DOM. React Native korzysta z Virtual DOMu na tej samej zasadzie co React, tylko po procesie rekonsilacji wywoływane są ponownie natywne elementy danej platformy zależnie od renderera (iOS/Android) a nie webowe. React Native używa Fiber tak samo jak ReactJS.
 
-\subsection{Bibliografia}
-
-Wszystkie pozycje bibliograficzne powinny być zacytowane w~treści pracy.
-
-Opisy bibliograficzne wynikają ze zwyczajów stosowanych w~różnych dziedzinach nauki lub wytycznych różnych wydawnictw. Przygotowując bibliografię powinno się więc \textbf{konsekwentnie przestrzegać} kolejności elementów opisu, jak i~sposobu ich zredagowania. Opis bibliograficzny powinien być przygotowany tak, aby możliwe było jednoznaczne określenie źródła bibliograficznego. Przy sporządzaniu bibliografii zaleca się \textbf{przyjąć kolejność alfabetyczną} względem nazwiska pierwszego autora, natomiast przy kilku pracach tego samego pierwszego autora przyjąć należy ich kolejność według daty publikacji (rosnąco). W~wypadku wykorzystania w~pracy źródeł drukowanych lub internetowych nieposiadających jawnie wskazanych autorów (np. materiały firmowe, dokumentacje), można w~spisie bibliografii wydzielić taką grupę źródeł bibliograficznych.
-
-Przykład cytowania źródła internetowego:~\cite{Chwalowski2002}, podręcznika dostępnego w~wersji elektronicznej:~\cite{Nowacki1996,Reckdahl1997}, artykułu naukowego:~\cite{Iksinski2000} i~książki:~\cite{Honczarenko2000,Opoka2001}.
-
-Wygodne narzędzie do posługiwania się wieloma pozycjami literaturowymi stanowić może menedżer bibliografii zgodny z notacją BibTeX np. darmowy JabRef. Plik przechowujący pozycje bibliograficzne zdefiniowane dla dokumentu ma nazwę \lstinline|bibliografia.bib|. Na podstawie tego pliku LaTeX generuje spis literatury (Bibliografię). Do tego celu służy pakiet \textbf{Biber}, stanowiący następcę pakietu BibTeX, zapewniający m.in. pełne wsparcie standardu Unicode. W~przypadku użycia edytora TeXstudio współpracującego ze środowiskiem MiKTeX w~systemie Windows, może być konieczna zmiana domyślnego narzędzia bibliograficznego w~konfiguracji programu (menu: opcje/konfiguruj/zbuduj/metapolecenia), a~także jego wywołanie (menu: narzędzia/bibliografia lub skrót klawiszowy F8), a~następnie ponowna kompilacja dokumentu.  
+%\subsection{Bibliografia}
+%
+%Wszystkie pozycje bibliograficzne powinny być zacytowane w~treści pracy.
+%
+%Opisy bibliograficzne wynikają ze zwyczajów stosowanych w~różnych dziedzinach nauki lub wytycznych różnych wydawnictw. Przygotowując bibliografię powinno się więc \textbf{konsekwentnie przestrzegać} kolejności elementów opisu, jak i~sposobu ich zredagowania. Opis bibliograficzny powinien być przygotowany tak, aby możliwe było jednoznaczne określenie źródła bibliograficznego. Przy sporządzaniu bibliografii zaleca się \textbf{przyjąć kolejność alfabetyczną} względem nazwiska pierwszego autora, natomiast przy kilku pracach tego samego pierwszego autora przyjąć należy ich kolejność według daty publikacji (rosnąco). W~wypadku wykorzystania w~pracy źródeł drukowanych lub internetowych nieposiadających jawnie wskazanych autorów (np. materiały firmowe, dokumentacje), można w~spisie bibliografii wydzielić taką grupę źródeł bibliograficznych.
+%
+%%Przykład cytowania źródła internetowego:~\cite{Chwalowski2002}, podręcznika dostępnego w~wersji elektronicznej:~\cite{Nowacki1996,Reckdahl1997}, artykułu naukowego:~\cite{Iksinski2000} i~książki:~\cite{Honczarenko2000,Opoka2001}.
+%
+%Wygodne narzędzie do posługiwania się wieloma pozycjami literaturowymi stanowić może menedżer bibliografii zgodny z notacją BibTeX np. darmowy JabRef. Plik przechowujący pozycje bibliograficzne zdefiniowane dla dokumentu ma nazwę \lstinline|bibliografia.bib|. Na podstawie tego pliku LaTeX generuje spis literatury (Bibliografię). Do tego celu służy pakiet \textbf{Biber}, stanowiący następcę pakietu BibTeX, zapewniający m.in. pełne wsparcie standardu Unicode. W~przypadku użycia edytora TeXstudio współpracującego ze środowiskiem MiKTeX w~systemie Windows, może być konieczna zmiana domyślnego narzędzia bibliograficznego w~konfiguracji programu (menu: opcje/konfiguruj/zbuduj/metapolecenia), a~także jego wywołanie (menu: narzędzia/bibliografia lub skrót klawiszowy F8), a~następnie ponowna kompilacja dokumentu.  
 
 
 \begin{zakonczenie}\label{chap:zakonczenie}
@@ -705,23 +753,6 @@ Wygodne narzędzie do posługiwania się wieloma pozycjami literaturowymi stanow
 	Interfejs użytkownika można wzbogacić o wiele informacji oraz funkcjonalności, dla przykładu - dane historyczne, możliwość ustalania własnych znaczników wraz z opisami, system alarmowy. Oprócz tego warto byłoby zapewnić możliwość pracy aplikacji w trybie offline. Dla warstwy dekodującej wsparcie dla zdań protokołu NMEA 2000 oraz AIS byłoby niewątpliwym atutem.
 \index{transformata}
 \end{zakonczenie}
-
-% ---------- Załączniki (opcjonalnie) ----------
-% Jeżeli brak załączników, wykomentować aż do końca sekcji z załącznikami (Załączniki END)
-
-\appendix
-
-\chapter{Tytuł załącznika jeden}\label{chap:dodatek1}
-
-Treść załącznika jeden. Mogą to być elementy związane z~opisem technicznym wykonanych w~pracy urządzeń, programów, dokumentacją projektową itp. Mogą to być również źródła literaturowe w~postaci kart katalogowych najistotniejszych elementów elektronicznych użytych w~projektowanym urządzeniu itp.
-
-\chapter{Zawartość dodatkowej płyty CD-ROM}\label{chap:dodatkowyCD}
-
-W~tym rozdziale powinno się przedstawić \textbf{zawartość DODATKOWEJ płyty CD dołączonej ewentualnie do wydrukowanej pracy}, która zawiera kody programów, wersje elektroniczne dokumentacji, materiały dodatkowe zebrane przez studenta itp.
-
-\noindent\textbf{Uwaga! Nie jest to opis płyty, zawierającej wersję elektroniczną pracy, ale płyty dodatkowej, nieobowiązkowej.}
-
-% ---------- Załączniki END ------------
 
 % Bibliografia
 \printbibliography[heading=bibintoc]

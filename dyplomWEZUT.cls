@@ -17,7 +17,7 @@
 
 % Buduj skorowidz
 \DeclareOption{skorowidz}{\def\@skorowidz{on}}
-\DeclareOption{skroty}{\def\@skroty{on}}
+\DeclareOption{skroty}{\def\@skroty{off}}
 
 % Fallback
 \DeclareOption*{\ClassWarning{dyplomWEZUT}{Nieznana opcja '\CurrentOption'}}
@@ -554,7 +554,7 @@
 }
 %
 \newcommand{\rysunek}[4]{
-\begin{figure}[htb]
+\begin{figure}[!ht]
 	\centering\includegraphics[height=6cm,width=0.8\textwidth,keepaspectratio]{graphic/#1}\\
 	\caption{#2}\source{#3}
 \end{figure}
