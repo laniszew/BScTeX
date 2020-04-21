@@ -77,41 +77,41 @@
 \begin{document}
 
 \begin{streszczenie}
-Celem pracy były stworzenie aplikacji prezentującej aktualne parametry jednostki pływającej. Zakres wykonanych prac obejmował przegląd aktualnie stosowanych rozwiązań, zapoznanie się i opis protokołu NMEA (National Marine Electronics Associa-tion) oraz część oprogramowania aplikacji mobilnej. Dla testów skorzystano z dostęp-nego   w sieci symulatora jednostki wysyłającej dane zakodowane protokołem NMEA. Głównymi z napotkanych problemów były – ilość oraz dokumentacja zdań protokołu NMEA, przygotowanie oprogramowania pod łatwy rozwój o wsparcie dla kolejnych zdań. Podczas wyboru technologii kierowano się głównie osobistym doświadczeniem oraz umiejętnościami. 
+Celem pracy były stworzenie aplikacji prezentującej aktualne parametry jednostki pływającej. Zakres wykonanych prac obejmował przegląd aktualnie stosowanych rozwiązań, zapoznanie się i opis protokołu NMEA (National Marine Electronics Association) oraz część oprogramowania aplikacji mobilnej. Dla testów skorzystano z dostępnego w sieci symulatora jednostki wysyłającej dane zakodowane protokołem NMEA. Głównymi z napotkanych problemów były – ilość oraz dokumentacja komend protokołu NMEA, przygotowanie oprogramowania pod łatwy rozwój o wsparcie dla kolejnych komend. Podczas wyboru technologii kierowano się głównie osobistym doświadczeniem oraz umiejętnościami. 
 \end{streszczenie}
 
 \begin{abstract}
-The aim ofthe work was to create a mobile application for presenting actual parameters ofthe vessel's voyage. The scope of work included an overview of actually usedso-lutions, acquiring the knowledge about NMEA (National Marine Electronics Associa-tion)protocol and describing it, creating software for mobile application. Fortesting purposes, NMEA Simulator (available on the internet) which sends NMEA encodedda-ta was used. The main encountered issues were – the amount and documentationof NMEA protocol sentences, preparing the software for easy expansion by additional-sentences. The choice of the technological stack was mainly based on personalexpe-rience and skills.
+The aim of the work was to create a mobile application for presenting actual parameters ofthe vessel's voyage. The scope of work included an overview of actually used solutions, acquiring the knowledge about NMEA (National Marine Electronics Association) protocol and describing it, creating software for mobile application. For testing purposes, NMEA Simulator (available on the internet) which sends NMEA encoded data was used. The main encountered issues were – the amount and documentation of NMEA protocol sentences, preparing the software for easy expansion by additional sentences. The choice of the technological stack was mainly based on personal experience and skills.
 \end{abstract}
 
 \maketitle
 
 \begin{wprowadzenie}
 
-Komunikacja między urządzeniami elektronicznymi jest obecnie standardem. Zależnie od obszaru działań wspomnianych urządzeń stosowane są odmienne protokoły. Jednostki pływające, których dotyczy ta praca korzystają ze standardu \textit{NMEA}. Brak jednak narzędzi pozwalających w łatwy sposób przedstawić człowiekowi dane zakodowane tym protokołem. Obecnie aplikacje mobilne stanowią ogromną część rynku oprogramowania. Niemal każdy posiada smartphone i korzysta z aplikacji dla systemów takich jak \textit{Android} czy \textit{iOS}. W kolejnych rozdziałach został przedstawiony proces tworzenia takiej aplikacji. Równie dużą, a nawet większą, rolę odgrywa obecnie komunikacja sieciowa, większość znanych nam stron i aplikacji bazuje na architekturze \textit{REST}, popularność zyskuje \textit{GraphQL}, a do określonych zadań stosuje się protokoły takie jak websocket. Właśnie ten ostatni został wykorzystany w pracy, o czym dowiemy się w kolejnych rozdziałach. 
+Komunikacja między urządzeniami elektronicznymi jest obecnie standardem. Zależnie od obszaru działań wspomnianych urządzeń stosowane są odmienne protokoły. Jednostki pływające, których dotyczy ta praca korzystają ze standardu \textit{NMEA}. Brak jednak narzędzi pozwalających w łatwy sposób przedstawić człowiekowi dane zakodowane tym protokołem. Obecnie aplikacje mobilne stanowią ogromną część rynku oprogramowania. Niemal każdy posiada smartphone i korzysta z aplikacji dla systemów takich jak \textit{Android} czy \textit{iOS}. W kolejnych rozdziałach został przedstawiony proces tworzenia takiej aplikacji. Równie dużą, a nawet większą, rolę odgrywa obecnie komunikacja sieciowa, większość znanych nam stron i aplikacji bazuje na architekturze \textit{REST}, popularność zyskuje \textit{GraphQL}, a do określonych zadań stosuje się protokoły takie jak \textit{WebSocket}. Właśnie ten ostatni został wykorzystany w pracy, co zostanie przedstawione w kolejnych rozdziałach. 
 
 \end{wprowadzenie}
 
 \cel{Celem pracy jest stworzenie aplikacji mobilnej prezentującej aktualne parametry jednostki pływającej.}
 
-\zakres{Przegląd aktualnie stosowanych rozwiązań w zakresie parametrów jednostek pływających oraz metod ich prezentacji, zapoznanie się i opisanie standardu dla protokołu \textit{NMEA} (National Marine Electronics Association) oraz stworzenie aplikacji mobilnej na Smartphone wraz z \textit{GUI} (Graphical User Interface) prezentującej aktualne parametry jednostki pływającej z wykorzystaniem sieci \textit{WiFi} jednostki pływającej. Celem dodatkowym jest przetestowanie aplikacji w warunkach rzeczywistych na jednostce pływającej.} 
+\zakres{Zakres pracy obejmuje Przegląd aktualnie stosowanych rozwiązań w zakresie parametrów jednostek pływających oraz metod ich prezentacji, zapoznanie się i opisanie standardu dla protokołu \textit{NMEA} (National Marine Electronics Association) oraz stworzenie aplikacji mobilnej na Smartphone wraz z \textit{GUI} (Graphical User Interface) prezentującej aktualne parametry jednostki pływającej z wykorzystaniem sieci \textit{WiFi} jednostki pływającej. Celem dodatkowym jest przetestowanie aplikacji w warunkach rzeczywistych na jednostce pływającej.} 
 
 \chapter{Protokół NMEA}\label{chap:NMEA protocol}
 
-Komunikacja między morskimi urządzeniami elektronicznymi wykorzystuje protokół \textit{NMEA}. Wyróżniamy dwie wersje tego protokołu – \textit{NMEA 0183} oraz \textit{NMEA 2000}. Obecnie interfejs \textit{NMEA 0183} zastępowany jest przez nowszy \textit{NMEA 2000}, jednak praca dotyczy będącego przez lata standardem oraz ciągle wykorzystywanego starszego protokołu. Odniesienia do protokołu \textit{NMEA} w dalszej części pracy oznaczać będą wersję 0183. 
+Komunikacja między morskimi urządzeniami elektronicznymi wykorzystuje protokół \textit{NMEA}. Wyróżniamy dwie wersje tego protokołu – \textit{NMEA 0183} oraz \textit{NMEA 2000} \cite{NMEA0183Standard, NMEA2000Standard}. Obecnie interfejs \textit{NMEA 0183} zastępowany jest przez nowszy \textit{NMEA 2000}, jednak praca dotyczy będącego przez lata standardem oraz ciągle wykorzystywanego starszego protokołu. Odniesienia do protokołu \textit{NMEA} w dalszej części pracy oznaczać będą wersję 0183. 
 
-\section{Format zdania NMEA}\label{sec:format nmea}
+\section{Format komendy NMEA}\label{sec:format nmea}
 
-Na podstawie \cite{NMEA0183} należy wydzielić podstawowe typy zdań: talker sentences (źródeł danych), proprietary sentences (zdefiniowanych przez poszczególnych producentów), query sentences (zapytań). Pierwszy typ, na którym skupia się ta praca, obejmuje sygnały GPS,  dane z urządzeń wbudowanych w jednostkę, czujników. Typ drugi pozwala indywidualnym producentom zdefiniować własne formaty, zdania tego typu zaczynają się od znaków \texttt{„\$P”} poprzedzających trzy literowy identyfikator producenta. Następnie zawarte są dane, o których decyduje producent. Ostatni typ pozwala urządzeniu zażądać wybranego rodzaju zdania od innego urządzenia. Ogólne formaty zdań wyglądają następująco:
+Na podstawie \cite{NMEA0183} należy wydzielić podstawowe typy komend: talker sentences (źródeł danych), proprietary sentences (zdefiniowanych przez poszczególnych producentów), query sentences (zapytań). Pierwszy typ, na którym skupia się ta praca, obejmuje sygnały GPS,  dane z urządzeń wbudowanych w jednostkę, czujników. Typ drugi pozwala indywidualnym producentom zdefiniować własne formaty, linie danych tego typu zaczynają się od znaków \texttt{„\$P”} poprzedzających trzy literowy identyfikator producenta. Następnie zawarte są dane, o których decyduje producent. Ostatni typ pozwala urządzeniu zażądać wybranego rodzaju komendy od innego urządzenia. Ogólne formaty wyglądają następująco:
 \begin{enumerate}
-\item Talker Sentence - \texttt{\$ttsss,d1,d2,....<CR><LF>}, gdzie „tt” oznacza identyfikator nadawcy, „sss” identyfikator zdania, a „d1, d2…” kolejne pola danych. 
+\item Talker Sentence - \texttt{\$ttsss,d1,d2,....<CR><LF>}, gdzie „tt” oznacza identyfikator nadawcy, „sss” identyfikator komendy, a „d1, d2…” kolejne pola danych. 
 \item Proprietary Sentence - \texttt{\$Psss,d1,d,2,…<CR><LF>}, gdzie „sss” oznacza identyfikator producenta, a „d1,d2...” kolejne pola danych.
-\item Query Sentence - \texttt{\$ttllQ,sss,<CR><LF>}, gdzie „tt” oznacza identyfikator żądającego, „ll” identyfikator urządzenia, do którego zostało skierowane zapytanie, a „sss” identyfikator żądanego zdania.
+\item Query Sentence - \texttt{\$ttllQ,sss,<CR><LF>}, gdzie „tt” oznacza identyfikator żądającego, „ll” identyfikator urządzenia, do którego zostało skierowane zapytanie, a „sss” identyfikator żądanej komendy.
 \end{enumerate}
-Każde zdanie nadane w protokole \textit{NMEA} zaczyna się od znaku „\$”, dane oddzielone są przecinkami, a zdanie kończy się sumą kontrolną poprzedzoną znakiem „*”.
+Każda linia danych nadana w protokole \textit{NMEA} zaczyna się od znaku „\$”, dane oddzielone są przecinkami, a komenda kończy się sumą kontrolną poprzedzoną znakiem „*”.
 
 \section{Identyfikatory nadawców}\label{sec:talker ids}
-Identyfikatory nadawców rozróżniają sentencje \textit{NMEA} ze względu na źródło danych, o których mowa w danym zdaniu.
+Identyfikatory nadawców rozróżniają linie danych \textit{NMEA} ze względu na źródło informacji, o których mowa w danej komendzie.
 
 \code{Identyfikatory nadawców}
 {Opracowanie własne \cite{gpsinformation, Raymond2019}}{\label{code:Talkers enum}}
@@ -139,9 +139,9 @@ const TalkerDescriptors: Record<TalkerIdentifiers, string> = {
 };
 \end{lstlisting}
 
-\section{Identyfikatory zdań}\label{sec:sentence ids}
-Lista wspieranych przez aplikację identyfikatorów zdań.
-\code{Identyfikatory zdań}
+\section{Identyfikatory komend}\label{sec:sentence ids}
+Lista wspieranych przez aplikację identyfikatorów komend.
+\code{Identyfikatory komend}
 {Opracowanie własne na podstawie \cite{gpsinformation, Raymond2019}}{\label{code:Sentences enum}}
 \begin{lstlisting}[language=JavaScript]
 enum SentenceIdentifiers {
@@ -161,7 +161,7 @@ enum SentenceIdentifiers {
 }
 \end{lstlisting}
 
-\code{Deskryptory zdań}
+\code{Deskryptory komend}
 {Opracowanie własne na podstawie \cite{gpsinformation, Raymond2019}}{\label{code: sentences descriptors}}
 \begin{lstlisting}[language=JavaScript]
 const SentencesDescriptions: Record<SentenceIdentifiers, string> = {
@@ -175,13 +175,13 @@ const SentencesDescriptions: Record<SentenceIdentifiers, string> = {
 };
 \end{lstlisting}
 
-\section{Zdania ujęte w aplikacji}\label{sec:application sentences}
-Z racji bardzo dużej ilości istniejących zdań protokołu \textit{NMEA} do realizacji pracy inżynierskiej zostały wybrane zdania uwzględnione w używanym symulatorze \textit{NMEA Simulator}. Oznacza to pełne dekodowanie oraz wyświetlanie danych w nich zawartych, jednak aplikacja została stworzona w taki sposób, aby dodawanie kolejnych zdań było jak najprostsze. Szczegóły zostaną omówione w dalszym rozdziale. Dane dostarczone przez symulator opisują zarówno położenie jak i dane na temat samej jednostki. Na ich podstawie zbudowany został interfejs graficzny aplikacji. Pełna lista znajduje się w tabeli 1.1.
+\section{Komendy ujęte w aplikacji}\label{sec:application sentences}
+Z racji bardzo dużej ilości istniejących komend protokołu \textit{NMEA} do realizacji pracy inżynierskiej zostały wybrane linie danych uwzględnione w używanym symulatorze \textit{NMEA Simulator}. Oznacza to pełne dekodowanie oraz wyświetlanie danych w nich zawartych, jednak aplikacja została stworzona w taki sposób, aby dodawanie kolejnych komend było jak najprostsze. Szczegóły zostaną omówione w dalszym rozdziale. Dane dostarczone przez symulator opisują zarówno położenie jak i dane na temat samej jednostki. Na ich podstawie zbudowany został interfejs graficzny aplikacji. Pełna lista znajduje się w tabeli 1.1.
 
-\tabela{Zdania \textit{NMEA} w pełni dekodowane przez aplikacje\label{tab:application sentences table}}
+\tabela{Komendy \textit{NMEA} w pełni dekodowane przez aplikacje\label{tab:application sentences table}}
 {Opracowanie własne}
 {\begin{tabular}{c|c|c|c}
-\thead{Identyfikator \\ nadawcy} & Nadawca & \thead{Identyfikator \\ zdania} & Zdanie \\\hline\hline
+\thead{Identyfikator \\ nadawcy} & Nadawca & \thead{Identyfikator \\ komendy} & Komenda \\\hline\hline
 SD & Sounder & DBT & Depth below transducer\\
 \hline
 GP & \makecell{Global Positioning \\ System (GPS)} & GGA & Global Positioning System Fix Data\\
@@ -201,7 +201,7 @@ II & Integrated instrumentation & VHW & Water speed and heading
 
 \chapter{Przegląd dostępnych rozwiązań}\label{chap: Available solutions}
 
-Gałąż przemysłu (biznesu) morskiego może być uważana za sektor, gdzie bezpieczeństwo gra odgórną rolę, stąd standard \textit{NMEA} definiuje także warstwę elektryczną interfejsu i w tym przypadku jest to \textit{EIA-422} - czyli połączenie z jednym masterem oraz wieloma slave'ami. Istnieje także standard de-facto, który mówi o pakowaniu ramek \textit{NMEA} w datagram UDP - ale nie opisuje go formalnie żaden dokument.
+Gałąż przemysłu (biznesu) morskiego może być uważana za sektor, gdzie bezpieczeństwo gra odgórną rolę, stąd standard \textit{NMEA} definiuje także warstwę elektryczną interfejsu i w tym przypadku jest to \textit{EIA-422} - czyli połączenie z jednym masterem oraz wieloma slave'ami. Istnieje także standard, który mówi o pakowaniu ramek \textit{NMEA} w datagram UDP - ale nie opisuje go formalnie żaden dokument.
 
 Chcąc dokonać kategoryzacji istniejących rozwiązań należałoby zastanowić się nad ograniczeniem ich spektrum, ponieważ wiele firm oferuje rozwiązania programowo-sprzętowe, które są gateway'em między fizycznym połączeniem \textit{EIA-422} (zdefiniowanym przez standard) - a siecią \textit{WiFi}. Przykładem takiego rozwiązania jest produkt \textit{WLN10 Smart} firmy \textit{DIGITAL YACHT} \cite{DIGITALYACHT} pozwalający na udostępnianie danych \textit{NMEA} przez \textit{WiFi}. Koszt tego produktu to 150£. W dalszej części omówione zostaną aplikacje wizualizujące owe dane .
 
@@ -214,17 +214,17 @@ Darmowe rozwiązania dostępne dla urządzeń mobilnych są w większości przyp
 
 \item \textit{NavMonitor} \cite{NavMonitor} ~Rysunek~\ref{fig:NavMonitor} wizualizuje dane dotyczące między innymi wiatru, pozycji, prędkości jednostki, czy temperatury oraz głębokości wody. Nie posiada jednak przedstawienia obiektu na mapie, co jest znaczącą wadą. 
 
-\item \textit{SeaWi Marine} \cite{SeaWiMarine} ~Rysunek~\ref{fig:SeaWi-Marine} jest jednym z najbardziej rozbudowanych rozwiązań. Aplikacja oferuje wiele funkcjonalności, w tym wizualzację danych w formie zarówno graficznej, czyli przedstawione na mapie jak i tekstowej w postaci zdekodowanych informacji. Pozwala na tworzenie punktów kontrolnych, konfigurację alarmów, a w tym także możliwość wysłania wiadomości SMS w przypadku ich wystąpienia, oraz wiele innych. Wadą jest niekompletny zestaw map, na chwilę obecną obejmujący Europę, Amerykę Północną, Morze Śródziemne, Morze Czarne, Karaiby, Australię, Nową Zelandię, Pacyfik oraz Afrykę Północną. Twórcy zapewniają, że mapy dla reszty świata zostaną dostarczone w przyszłości.
+\item \textit{SeaWi Marine} \cite{SeaWiMarine} ~Rysunek~\ref{fig:SeaWi-Marine} jest jednym z najbardziej rozbudowanych rozwiązań. Aplikacja oferuje wiele funkcjonalności, w tym wizualzację danych w formie zarówno graficznej, czyli przedstawione na mapie, jak i tekstowej w postaci zdekodowanych informacji. Pozwala na tworzenie punktów kontrolnych, konfigurację alarmów, a w tym także możliwość wysłania wiadomości SMS w przypadku ich wystąpienia, oraz wiele innych. Wadą jest niekompletny zestaw map, na chwilę obecną obejmujący Europę, Amerykę Północną, Morze Śródziemne, Morze Czarne, Karaiby, Australię, Nową Zelandię, Pacyfik oraz Afrykę Północną. Twórcy zapewniają, że mapy dla reszty świata zostaną dostarczone w przyszłości.
 
-\rysunek{\textit{NMEA-Tools}}
+\rysunek{NMEA-Tools}
 {NMEA Tools \label{fig:NMEA-Tools}}
 {https://play.google.com/store/apps/details?id=com.peterhohsy.nmeatools}
 
-\rysunek{\textit{NavMonitor}}
+\rysunek{NavMonitor}
 {NavMonitor \label{fig:NavMonitor}}
 {https://play.google.com/store/apps/details?id=com.aboni.boatinga}
 
-\rysunek{\textit{SeaWi-Marine}}
+\rysunek{SeaWi-Marine}
 {SeaWi Marine \label{fig:SeaWi-Marine}}
 {https://play.google.com/store/apps/details?id=net.seawimarine.activities}
 
@@ -239,7 +239,7 @@ Płatne rozwiązania zrealizowane są w modelu jednorazowej płatności za oprog
 
 \item \textit{Seapilot} \cite{Seapilot} ~Rysunek~\ref{fig:Seapilot} oferuje przede wszystkim pełen detali widok mapy, przeznaczony do specjalistycznego użycia. Podstawowe informacje na temat jednostki widoczne są w formie tekstowej. Dostęp do pełni funkcjonalności wymaga wykupienia licencji na stronie producenta. Cena wynosi 39,99\$ rocznie. Dodatkowo należy wykupić mapy obejmujące interesujące użytkownika rejony, również opłacane rocznie.
 
-\item \textit{NMEAremote} \cite{NMEAremote} ~Rysunek~\ref{fig:NMEAremote} podobnie jak konkurencja przedstawienie zdekodowanych danych w przyjaznej dla użytkownika formie. Brakuje przedstawienia obiektu na mapie. Twórcy zapewniają listę wspieranych zdań protokołu \textit{NMEA 0183} oraz \textit{NMEA 2000}. Jest to odpowiednio trzydzieści siedem oraz dziewiętnaście typów zdań. Kosz aplikacji wynosi 17,99\$.  
+\item \textit{NMEAremote} \cite{NMEAremote} ~Rysunek~\ref{fig:NMEAremote} podobnie jak konkurencja przedstawienie zdekodowanych danych w przyjaznej dla użytkownika formie. Brakuje przedstawienia obiektu na mapie. Twórcy zapewniają listę wspieranych komend protokołu \textit{NMEA 0183} oraz \textit{NMEA 2000}. Jest to odpowiednio trzydzieści siedem oraz dziewiętnaście typów komend. Kosz aplikacji wynosi 17,99\$.  
 
 \end{enumerate}
 
@@ -262,7 +262,7 @@ Płatne rozwiązania zrealizowane są w modelu jednorazowej płatności za oprog
 \begin{figure}[H]
   \centering
     \includegraphics[scale=0.3]{graphic/NMEAremote}
-    \caption\textit{{NMEAremote}}
+    \caption{\textit{NMEAremote}}
     \source{https://apps.apple.com/us/app/nmearemote/id412806204}
     \label{fig:NMEAremote}
 \end{figure}
@@ -305,7 +305,7 @@ Wyżej wymienione kryteria mają olbrzymie znaczenie podczas wyboru języka dla 
 
 \section{Framework}\label{sec: framework}
 
-Framework dostarcza programiście szkielet aplikacji, a także metody, komponenty, serwisy oraz składnię do ich wykorzystywania. Wedle statystyki przedstawionej na ~Rysunek~\ref{fig:Frameworks_statictics} \cite{FrameworksPopularity} najpopularniejszym z frameworków do tworzenia aplikacji webowych po stronie klienta jest \textit{ReactJs}, konkurujący z frameworkami nazwanymi \textit{Angular} oraz \textit{Vue}. Nie udostępnia on jednak możliwości tworzenia natywnych aplikacji mobilnych na systemy \textit{Android} oraz \textit{iOS}. Na te potrzeby powstał \textit{ReactNative}. Jest to odpowiednik wspomnianego \textit{ReactJs} dedykowany dla platform mobilnych. Podstawowe założenia takie jak kompozycja komponentów, przesyłanie danych, czy cykl życia komponentu pozostają bez zmian. Znaczące różnice wynikają z faktu, że w odróżnieniu do przeglądarek, aplikacje mobilne nie wspierają składni \textit{HTML} oraz \textit{CSS}. Na podstawie \cite{ReactNative} w miejsce pierwszego \textit{ReactNative} dostarcza podstawowe komponenty pozwalające na budowanie widoku. Odpowiednikiem elementu \textit{<div />} w składni \textit{HTML} jest w tym wypadku element \textit{<View />}. Olbrzymią zaletą tego frameworka jest fakt, że w podanym przykładzie element \textit{<View />} zostanie wyrenderowany przy użyciu natywnego \textit{API} platformy, co zapewnia dużo lepszą wydajność w porównaniu do przykładowo frameworku\textit{Cordowa}, który do renderowania wykorzystuje \textit{WebView}. ~Rysunek~\ref{fig:react-native} Arkuszy Styli \textit{CSS} zastąpione są natomiast przez obiekty \textit{Stylesheets}. Zaletą takiego podejścia jest możliwość przeniesienia aplikacji napisanej w \textit{ReactNative} na \textit{ReactJS} przy stosunkowo niewielkim nakładzie pracy, gdyż znaczna część kodu może zostać użyta ponownie. 
+Framework dostarcza programiście szkielet aplikacji, a także metody, komponenty, serwisy oraz składnię do ich wykorzystywania. Wedle statystyki przedstawionej na ~Rysunek~\ref{fig:Frameworks_statictics} \cite{FrameworksPopularity} najpopularniejszym z frameworków do tworzenia aplikacji webowych po stronie klienta jest \textit{ReactJs}, konkurujący z frameworkami nazwanymi \textit{Angular} oraz \textit{Vue}. Nie udostępnia on jednak możliwości tworzenia natywnych aplikacji mobilnych na systemy \textit{Android} oraz \textit{iOS}. Na te potrzeby powstał \textit{ReactNative}. Jest to odpowiednik wspomnianego \textit{ReactJs} dedykowany dla platform mobilnych. Podstawowe założenia takie jak kompozycja komponentów, przesyłanie danych, czy cykl życia komponentu pozostają bez zmian. Znaczące różnice wynikają z faktu, że w odróżnieniu do przeglądarek, aplikacje mobilne nie wspierają składni \textit{HTML} oraz \textit{CSS}. Na podstawie \cite{ReactNative} w miejsce pierwszego \textit{ReactNative} dostarcza podstawowe komponenty pozwalające na budowanie widoku. Odpowiednikiem elementu \textit{<div />} w składni \textit{HTML} jest w tym wypadku element \textit{<View />}. Olbrzymią zaletą tego frameworka jest fakt, że w podanym przykładzie element \textit{<View />} zostanie wyrenderowany przy użyciu natywnego \textit{API} platformy, co zapewnia dużo lepszą wydajność w porównaniu do przykładowo frameworku\textit{Cordova}, który do renderowania wykorzystuje \textit{WebView}. ~Rysunek~\ref{fig:react-native} Arkuszy Styli \textit{CSS} zastąpione są natomiast przez obiekty \textit{Stylesheets}. Zaletą takiego podejścia jest możliwość przeniesienia aplikacji napisanej w \textit{ReactNative} na \textit{ReactJS} przy stosunkowo niewielkim nakładzie pracy, gdyż znaczna część kodu może zostać użyta ponownie. 
 Dodatkowo został wykorzystany framework oraz platforma \textit{Expo}. Wedle \cite{Expo} jest to zbiór narzędzi oraz serwisów zbudowanych wokół \textit{ReactNative}, mający na celu przyspieszenie procesu tworzenia aplikacji. Dostarcza on między innymi przydatne warstwy abstrakcji nałożone na natywne \textit{API}, przykładowo dostęp do kamery, czy żyroskopu. Dodatkowo zapewnia rozbudowane \textit{CLI} (Command Line Interface). Jedną z jego możliwości jest niezwykle proste budowanie kodu na określoną platformę oraz serwer deweloperski z funkcją 'hot-reload'. Oznacza to, że zapisanie zmiany w kodzie natychmiast wywoła proces budowy odpowiednich plików, a programista ma możliwość obserwowania zmian na bieżąco używając symulatora urządzenia mobilnego lub rzeczywistego urządzenia. Sam proces połączenia z serwerem deweloperskim jest niesłychanie prosty. \textit{Expo} dostarcza adres url zawierający pliki źródłowe. Dla ułatwienia jest on również przedstawiony jak kod QR. Dowolne urządzenie mobilne posiadające aplikację kliencką \textit{Expo} po zeskanowaniu tego kodu uruchomi wersję deweloperską aplikacji. ~Rysunek~\ref{fig:expo} Oczywiście takie udogodnienia nakładają pewne ograniczenia, przez co dla dużych projektów z rozbudowaną logiką biznesową Expo może okazać się niewłaściwym wyborem. Jednak analiza pod kątem potrzeb omawianej pracy pozwoliła na uzasadniony wybór tego narzędzia.
 
 \rysunek{cross-platform}
@@ -389,7 +389,7 @@ module.exports = function(api) {
 Dla zachowania standardów jakości oraz jednolitego stylu kodu zostało wykorzystane narzędzie do analizy statycznej. Za powszechny standard uznaje się oprogramowanie \textit{ESLint}. Zapewnia ono olbrzymią ilość konfigurowalnych zasad, dotyczących zarówno stylu kodu takich jak maksymalna długość linii czy sposób indentacji, jak i jego logiki. Warto wspomnieć, że narzędzie to posiada wsparcie najpopularniejszych środowisk programistycznych. W przypadku języka \textit{JavaScript/TypeScript} są to \textit{Visual Studio Code}, \textit{WebStorm}, \textit{IntelliJ IDEA}. Dzięki temu błędy wykrywane są automatycznie podczas pisania kodu. W przypadku projektów komercyjnych tworzonych przez zespół programistów częstą praktyką jest tworzenie tak zwanych 'git hooków', które mają na celu sprawdzenie kodu przez między innymi linter przed utworzeniem commita, a w przypadku błędów uniemożliwienie go. Omawiany projekt korzysta ze zbioru zasad dostarczonego przez firmę \textit{Airbnb} skonfigurowanych wedle osobistych preferencji.
 
 \section{Komunikacja z serwerem}\label{sec: server communication} 
-Sposób komunikacji z serwisami sieciowymi zależy od typu \textit{API} danego serwisu. Najczęściej spotykamy się z \textit{REST API} opartymi na protokole http. Taki serwis opierania się na schemacie, w którym klient wysyła zapytanie i oczekuje na odpowiedź. Zapytanie http w momencie wywołania otwiera połączenie, a po przesłaniu odpowiedzi lub określonym (krótkim) czasie je zamyka. Ciągłe otwieranie i zamykanie połączenia jest olbrzymim problemem dla aplikacji wymagających stałej aktualizacji danych. W przypadku systemu wizualizującego możliwie aktualny stan modułów konieczna jest ciągła aktualizacja danych. Dla takich potrzeb wykorzystywany jest protokół \textit{WebSocket}, umożliwiający otworzenie połączenia między serwerem a klientem oraz komunikację w obie strony. Dzięki temu klient jest w stanie nasłuchiwać dostarczanych wiadomości bez konieczności tworzenia i wysyłania zapytania. Korzystając z tego samego połączenia klient ma możliwość wysłania wiadomości do serwera. Wymienione cechy czynią protokół \textit{WebSocket} idealnym wyborem dla aplikacji wymagającej możliwie najbardziej aktualnych danych. Wykorzystany do testów \textit{NMEA Simulator} zapewnia funkcję serwera tego typu. Klient nie posiada konieczności wysyłania informacji do nadawcy, obsługuje jedynie ich odbiór. Wiersze od siódmego do dziewiątego (kod źródłowy~\ref{code: connectWebsocket}) zawierają implementację uchytwu (ang. handler) obsługującego odbiór wiadomości.
+Sposób komunikacji z serwisami sieciowymi zależy od typu \textit{API} danego serwisu. Najczęściej spotykany to \textit{REST API} oparty na protokole http. Taki serwis opiera się na schemacie, w którym klient wysyła zapytanie i oczekuje na odpowiedź. Zapytanie http w momencie wywołania otwiera połączenie, a po przesłaniu odpowiedzi lub określonym (krótkim) czasie je zamyka. Ciągłe otwieranie i zamykanie połączenia jest olbrzymim problemem dla aplikacji wymagających stałej aktualizacji danych. W przypadku systemu wizualizującego możliwie aktualny stan modułów konieczna jest ciągła aktualizacja danych. Dla takich potrzeb wykorzystywany jest protokół \textit{WebSocket}, umożliwiający otworzenie połączenia między serwerem a klientem oraz komunikację w obie strony. Dzięki temu klient jest w stanie nasłuchiwać dostarczanych wiadomości bez konieczności tworzenia i wysyłania zapytania. Korzystając z tego samego połączenia klient ma możliwość wysłania wiadomości do serwera. Wymienione cechy czynią protokół \textit{WebSocket} idealnym wyborem dla aplikacji wymagającej możliwie najbardziej aktualnych danych. Wykorzystany do testów \textit{NMEA Simulator} zapewnia funkcję serwera tego typu. Klient nie posiada konieczności wysyłania informacji do nadawcy, obsługuje jedynie ich odbiór. Wiersze od siódmego do dziewiątego (kod źródłowy~\ref{code: connectWebsocket}) zawierają implementację uchytwu (ang. handler) obsługującego odbiór wiadomości.
 \code{Metoda tworząca połączenie \textit{WebSocket}}
 {Opracowanie własne}{\label{code: connectWebsocket}}
 \begin{lstlisting}[language=JavaScript]
@@ -419,10 +419,10 @@ Sposób komunikacji z serwisami sieciowymi zależy od typu \textit{API} danego s
     
 \end{lstlisting}
 
-\section{Dekoder zdań \textit{NMEA}}\label{sec: NMEA parser}
-Otrzymywane z serwera dane są pojedynczym stringiem zawierającym wszystkie zdania \textit{NMEA} oddzielone znakiem końca linii. Pierwszym krokiem niezbędnym dalszego przetwarzania jest więc rozbicie otrzymanego ciągu znaków na tablicę zawierającą tekstową reprezentację pojedynczego zdania. Następnie dla każdego z elementów wywoływana jest metoda zwracająca obiekt reprezentujący ramkę \textit{NMEA} o określonej strukturze. Dołożono wszelkich starań, aby rozwiązanie było jak najbardziej generyczne i łatwe w rozbudowie. Proces dekodowania rozpoczyna się od walidacji sumy kontrolnej zdania (wiersze od drugiego do czwartego (kod źródłowy~\ref{code: parseNmeaSentence}). W przpadku powodzenia wyodrębniane są identyfikatory nadawcy oraz zdania (wiersze jedenaście oraz dwanaście (kod źródłowy~\ref{code: parseNmeaSentence})). Na podstawie identyfikatora zdania uzyskiwany jest jego format (wiersz czternasty kod źródłowy~\ref{code: parseNmeaSentence} oraz kod źródłowy~\ref{code: SentencesFormats}). Format określa typ danych każdego pola w zdaniu, co umożliwiło stworzenie struktury określającej sposób dekodowania każdego pola (kod źródłowy ~\ref{code: parsers mapper}). Dzięki takiemu rozwiązaniu programista w łatwy sposób jest w stanie rozszerzyć obsługiwane typy pól. Posiadając informację o typach pól zawartych w zdaniu oraz o ich wartości możliwe jest stworzenie obiektu opisującego zdanie \textit{NMEA}. Oznacza to także zakończenie części generycznej dla wszystkich typów zdań, gdyż format danych w poszczególnych polach nie określa ich znaczenia. Aby otrzymać w pełni wartościowe informacje należy opisać strukturę poszczególnych zdań oraz metodę przenoszącą surowe dane do właściwych pól tej struktury. Taki interfejs oraz metoda są wykorzystywane do utworzenia obiektu pakietu (wiersz dwudziesty drugi kod źródłowy ~\ref{code: parseNmeaSentence}) reprezentującego w pełni odkodowane zdanie \textit{NMEA}. Przykładowy plik dla zdania DBT przedstawia kod źródłowy ~\ref{code: DBT codec}. Rozszerzenie aplikacji o kolejny typ zdania wymaga jedynie utworzenia takiego pliku oraz dodanie utworzonego interfejsu i metody do kolekcji wykorzystywanych przy parsowaniu.
+\section{Dekoder komend \textit{NMEA}}\label{sec: NMEA parser}
+Otrzymywane z serwera dane są pojedynczym ciągiem znaków zawierającym wszystkie komendy \textit{NMEA} oddzielone znakiem końca linii. Pierwszym krokiem niezbędnym dalszego przetwarzania jest więc rozbicie otrzymanej odpowiedzi na tablicę zawierającą tekstową reprezentację pojedynczej linii danych. Następnie dla każdego z elementów wywoływana jest metoda zwracająca obiekt reprezentujący ramkę \textit{NMEA} o określonej strukturze. Dołożono wszelkich starań, aby rozwiązanie było jak najbardziej generyczne i łatwe w rozbudowie. Proces dekodowania rozpoczyna się od walidacji sumy kontrolnej komendy (wiersze od drugiego do czwartego (kod źródłowy~\ref{code: parseNmeaSentence}). W przpadku powodzenia wyodrębniane są identyfikatory nadawcy oraz linii danych (wiersze jedenaście oraz dwanaście (kod źródłowy~\ref{code: parseNmeaSentence})). Na podstawie identyfikatora komendy uzyskiwany jest jego format (wiersz czternasty kod źródłowy~\ref{code: parseNmeaSentence} oraz kod źródłowy~\ref{code: SentencesFormats}). Format określa typ danych każdego pola, co umożliwiło stworzenie struktury określającej sposób dekodowania (kod źródłowy ~\ref{code: parsers mapper}). Dzięki takiemu rozwiązaniu programista w łatwy sposób jest w stanie rozszerzyć obsługiwane typy pól. Posiadając informację o strukturze komendy oraz o wartościach pól możliwe jest stworzenie obiektu opisującego ramkę \textit{NMEA}. Oznacza to także zakończenie części generycznej dla wszystkich typów komend, gdyż format danych w poszczególnych polach nie określa ich znaczenia. Aby otrzymać w pełni wartościowe informacje należy opisać strukturę poszczególnych rozkazów oraz metodę przenoszącą surowe dane do właściwych pól tej struktury. Taki interfejs oraz metoda są wykorzystywane do utworzenia obiektu pakietu (wiersz dwudziesty drugi kod źródłowy ~\ref{code: parseNmeaSentence}) reprezentującego w pełni odkodowaną komendę \textit{NMEA}. Przykładowy plik dla linii danych DBT przedstawia kod źródłowy ~\ref{code: DBT codec}. Rozszerzenie aplikacji o kolejny typ komendy wymaga jedynie utworzenia takiego pliku oraz dodanie utworzonego interfejsu i metody do kolekcji wykorzystywanych przy parsowaniu.
 
-\code{Metoda parsująca zdania \textit{NMEA}}
+\code{Metoda parsująca komendy \textit{NMEA}}
 {Opracowanie własne}{\label{code: parseNmeaSentence}}
 \begin{lstlisting}[language=JavaScript]
 export const parseNmeaSentence = (sentence: string): Packet => {
@@ -454,7 +454,7 @@ export const parseNmeaSentence = (sentence: string): Packet => {
 };
 \end{lstlisting}
 
-\code{Obiekt definiujący formaty zdań}
+\code{Obiekt definiujący formaty komend}
 {Opracowanie własne}{\label{code: SentencesFormats}}
 \begin{lstlisting}[language=JavaScript]
 const SentencesFormats: Record<SentenceIdentifiers, string> = {
@@ -521,9 +521,9 @@ Uzyskane dane oczywiście należy przechowywać w aplikacji. Komponenty tworząc
 \begin{enumerate}
  \item nmeaConnectorContext odpowiedzialny za utworzenie połączenia \textit{WebSocket}, odbieranie informacji ze strony serwera oraz przechowywanie ich. 
  
- \item unitContext odpowiedzialny za sformatowane dane dotyczące zdań \textit{NMEA} opisujących parametry jednostki pływającej. 
+ \item unitContext odpowiedzialny za sformatowane dane dotyczące komend \textit{NMEA} opisujących parametry jednostki pływającej. 
  
- \item positionContext odpowiedzialny za sformatowane dane dotyczące zdań \textit{NMEA} opisujących położenie jednostki pływającej. 
+ \item positionContext odpowiedzialny za sformatowane dane dotyczące komend \textit{NMEA} opisujących położenie jednostki pływającej. 
  
 \end{enumerate}
 
@@ -642,7 +642,7 @@ function ConsumerComponent() {
 
 \end{lstlisting}
 
-Konteksty dotyczące jednostki oraz pozycji zawierają sformatowane zdania (wiersze od pierwszego do piątego ~\ref{code: position context}), które użyte zostały do zbudowania GUI. Za przekształcenie otrzymywanego ciągu znaków do struktur pakietów zawartych w kontekstach odpowiada metoda przedstawiona w kodzie źródłowym ~\ref{code: parse&dispatch}). Jest ona wywoływana przez każdą zmianę stanu kontekstu 'nmeaConnectorContext', czyli przy odbiorze danych z serwera. Otrzymany ciąg znaków ulega podziałowi względem znacznika końca linii. Każdy element tablicy wynikowej tego podziału poddawany jest próbie dekodowania. Uzyskane dane przypisane zostają do ładunku akcji dla określonego kontekstu w zależności od identyfikatora zdania. Dzięki temu komponenty reprezentujące widok mogą bazować na spreparowanych danych zawartych w kontekstach 'unitContext' oraz 'positionContext', gdyż są one aktualizowane natychmiastowo po otrzymaniu wiadomości z serwera.
+Konteksty dotyczące jednostki oraz pozycji zawierają sformatowane komendy (wiersze od pierwszego do piątego ~\ref{code: position context}), które użyte zostały do zbudowania GUI. Za przekształcenie otrzymywanego ciągu znaków do struktur pakietów zawartych w kontekstach odpowiada metoda przedstawiona w kodzie źródłowym ~\ref{code: parse&dispatch}). Jest ona wywoływana przez każdą zmianę stanu kontekstu 'nmeaConnectorContext', czyli przy odbiorze danych z serwera. Otrzymany ciąg znaków ulega podziałowi względem znacznika końca linii. Każdy element tablicy wynikowej tego podziału poddawany jest próbie dekodowania. Uzyskane dane przypisane zostają do ładunku akcji dla określonego kontekstu w zależności od identyfikatora komendy. Dzięki temu komponenty reprezentujące widok mogą bazować na spreparowanych danych zawartych w kontekstach 'unitContext' oraz 'positionContext', gdyż są one aktualizowane natychmiastowo po otrzymaniu wiadomości z serwera.
 
 \code{Dekodowanie i dystrybucja otrzymanych danych}
 {Opracowanie własne}{\label{code: parse&dispatch}}
@@ -690,7 +690,7 @@ Konteksty dotyczące jednostki oraz pozycji zawierają sformatowane zdania (wier
 
 \item MapView ~Rysunek~\ref{fig:MapView} odpowiedzialny za stworzenie mapy przy wykorzystaniu API firmy Google  . Komponent ten nanosi jednostkę na mapę oraz przemieszcza widoczny obszar wraz z ruchem jednostki. Dodatkowo wyznacza na mapie linię obrazującą przebytą drogę. W przypadku interakcji użytkownika w postaci przesunięcia, obrócenia lub przybliżenia/oddalenia mapy funkcjonalność śledzenia jednostki zostaje wyłączona. Dzięki temu zabiegowi doświadczenia użytkownika zbliżone są do zapewnianych przez mobilną aplikację Google Maps. Za wycentrowanie ekranu na jednostce oraz przywrócenie funkcji podążania odpowiedzialny jest przycisk umieszczony w dolnej części ekranu. Przy wykorzystaniu kontekstu pozycji w lewej dolnej części ekranu przedstawione są aktualne dane na temat położenia geograficznego. Widok ten wykorzystuje również kontekst jednostki, aby uzyskać informację o kącie skierowania. Na jej podstawie obracana jest ikonka statku reprezentująca obiekt.
 
-\item UnitView ~Rysunek~\ref{fig:UnitView} odpowiedzialny za stworzenie rozwijalnych kart reprezentujących poszczególne zdania NMEA. Przeprowadzany jest w nim proces iteracji po wszystkich elementach zawartych w kontekstach jednostki oraz pozycji. Dla każdego z nich tworzy komponent FrameItem, który otrzymuje informacje dotyczące konkretnego zdania. Przy użyciu wewnętrznego stanu określana jest ilość widocznych informacji. Domyślnie przedstawia on identyfikator zdania oraz jego deskryptor. W odpowiedzi na dotknięcie ekranu przez użytkownika komponent renderuje pozostałe informacje reprezentujące wszystkie pola zawarte w danym zdaniu oraz ich wartości. Ponowna interakcja użytkownika na tym samym elemencie powoduje ukrycie wspomnianych danych.
+\item UnitView ~Rysunek~\ref{fig:UnitView} odpowiedzialny za stworzenie rozwijalnych kart reprezentujących poszczególne komendy NMEA. Przeprowadzany jest w nim proces iteracji po wszystkich elementach zawartych w kontekstach jednostki oraz pozycji. Dla każdego z nich tworzy komponent FrameItem, który otrzymuje informacje dotyczące konkretnej linii danych. Przy użyciu wewnętrznego stanu określana jest ilość widocznych informacji. Domyślnie przedstawia on identyfikator komendy oraz jej deskryptor. W odpowiedzi na dotknięcie ekranu przez użytkownika komponent renderuje pozostałe informacje reprezentujące wszystkie pola oraz ich wartości. Ponowna interakcja użytkownika na tym samym elemencie powoduje ukrycie wspomnianych danych.
 
 \item SettingsView ~Rysunek~\ref{fig:SettingsView} odpowiedzialny za zarządzanie ustawieniami aplikacji. Dla omawianej aplikacji jedynym konfigurowalnym ustawieniem jest adres serwera WebSocket. Komponent ten przedstawia aktualny adres oraz stan połączenia. Zmiana adresu skutkuje próbą utworzenia połączenia. Udane nawiązanie powoduje zmianę tekstowej reprezentacji połączenia (zielony napis "CONNECTED" lub czerwony "DISCONNECTED") dzięki czemu użytkownik nie jest zmuszony do zmiany widoku w celu weryfikacji. 
 	 
@@ -733,7 +733,7 @@ Konteksty dotyczące jednostki oraz pozycji zawierają sformatowane zdania (wier
 %{Settings \label{fig:SettingsView}}
 %{Opracowanie własne}
 
-	Taki podział komponentów pozwala na intuicyjne odczytywanie danych dotyczących położenia, dzięki wykorzystaniu map Google, oraz dokładnych odczytów poszczególnych składowych zdań \textit{NMEA}. Każdy nowy format dodany do aplikacji poprzez stworzenie odpowiedniego pliku kodeka automatycznie zostanie odzwierciedlony w UnitView o ile dane otrzymywane przez aplikację takie zdanie zawierają. Dzięki temu interfejs użytkownika jest łatwo rozwijalny.
+	Taki podział komponentów pozwala na intuicyjne odczytywanie danych dotyczących położenia, dzięki wykorzystaniu map Google, oraz dokładnych odczytów poszczególnych składowych komend \textit{NMEA}. Każdy nowy format dodany do aplikacji poprzez stworzenie odpowiedniego pliku kodeka automatycznie zostanie odzwierciedlony w UnitView o ile dane otrzymywane przez aplikację taką komendę zawierają. Dzięki temu interfejs użytkownika jest łatwo rozwijalny.
 
 % reconsilation, virtual DOM. React Native korzysta z Virtual DOMu na tej samej zasadzie co React, tylko po procesie rekonsilacji wywoływane są ponownie natywne elementy danej platformy zależnie od renderera (iOS/Android) a nie webowe. React Native używa Fiber tak samo jak ReactJS.
 
@@ -749,8 +749,8 @@ Konteksty dotyczące jednostki oraz pozycji zawierają sformatowane zdania (wier
 
 
 \begin{zakonczenie}\label{chap:zakonczenie}
-	Udało się stworzyć aplikację mobilną zgodną z wymaganiami pracy, pod niektórymi względami przewyższającą część dostępnych na rynku rozwiązań. Struktura kodu źródłowego pozwala na oddzielenie warstwy dekodowania danych od warstwy widoku. Dzięki temu możliwym byłoby dostarczenie biblioteki zajmującej się przetwarzaniem danych NMEA, możliwej do wykorzystania przez inne aplikacje. Najtrudniejszym zagadnieniem okazało się stworzenie jak najbardziej generycznej obsługi zdań. Dodatkowe problemy sprawił również utrudniony dostęp do dokumentacji, większość dostępnej wiedzy stanowią źródła w postaci stron internetowych. 
-	Interfejs użytkownika można wzbogacić o wiele informacji oraz funkcjonalności, dla przykładu - dane historyczne, możliwość ustalania własnych znaczników wraz z opisami, system alarmowy. Oprócz tego warto byłoby zapewnić możliwość pracy aplikacji w trybie offline. Dla warstwy dekodującej wsparcie dla zdań protokołu NMEA 2000 oraz AIS byłoby niewątpliwym atutem.
+	Udało się stworzyć aplikację mobilną zgodną z wymaganiami pracy, pod niektórymi względami przewyższającą część dostępnych na rynku rozwiązań. Struktura kodu źródłowego pozwala na oddzielenie warstwy dekodowania danych od warstwy widoku. Dzięki temu możliwym byłoby dostarczenie biblioteki zajmującej się przetwarzaniem danych NMEA, możliwej do wykorzystania przez inne aplikacje. Najtrudniejszym zagadnieniem okazało się stworzenie jak najbardziej generycznej obsługi komend. Dodatkowe problemy sprawił również utrudniony dostęp do dokumentacji, większość dostępnej wiedzy stanowią źródła w postaci stron internetowych. 
+	Interfejs użytkownika można wzbogacić o wiele informacji oraz funkcjonalności, dla przykładu - dane historyczne, możliwość ustalania własnych znaczników wraz z opisami, system alarmowy. Oprócz tego warto byłoby zapewnić możliwość pracy aplikacji w trybie offline. Dla warstwy dekodującej wsparcie dla komend protokołu NMEA 2000 oraz AIS byłoby niewątpliwym atutem.
 \index{transformata}
 \end{zakonczenie}
 

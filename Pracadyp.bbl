@@ -47,6 +47,64 @@
       \verb https://redux.js.org/
       \endverb
     \endentry
+    \entry{NMEA0183Standard}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=939f67b3bf4ef2a6cf239cd6fb368426}{%
+           family={Association},
+           familyi={A\bibinitperiod},
+           given={National\bibnamedelimb Marine\bibnamedelima Electronics},
+           giveni={N\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{939f67b3bf4ef2a6cf239cd6fb368426}
+      \strng{fullhash}{939f67b3bf4ef2a6cf239cd6fb368426}
+      \strng{bibnamehash}{939f67b3bf4ef2a6cf239cd6fb368426}
+      \strng{authorbibnamehash}{939f67b3bf4ef2a6cf239cd6fb368426}
+      \strng{authornamehash}{939f67b3bf4ef2a6cf239cd6fb368426}
+      \strng{authorfullhash}{939f67b3bf4ef2a6cf239cd6fb368426}
+      \field{extraname}{1}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.nmea.org/content/STANDARDS/NMEA_0183_Standard}}
+      \field{title}{Stanard protokołu NMEA 0183}
+      \field{year}{2000}
+      \verb{urlraw}
+      \verb https://www.nmea.org/content/STANDARDS/NMEA_0183_Standard
+      \endverb
+      \verb{url}
+      \verb https://www.nmea.org/content/STANDARDS/NMEA_0183_Standard
+      \endverb
+    \endentry
+    \entry{NMEA2000Standard}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=939f67b3bf4ef2a6cf239cd6fb368426}{%
+           family={Association},
+           familyi={A\bibinitperiod},
+           given={National\bibnamedelimb Marine\bibnamedelima Electronics},
+           giveni={N\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{939f67b3bf4ef2a6cf239cd6fb368426}
+      \strng{fullhash}{939f67b3bf4ef2a6cf239cd6fb368426}
+      \strng{bibnamehash}{939f67b3bf4ef2a6cf239cd6fb368426}
+      \strng{authorbibnamehash}{939f67b3bf4ef2a6cf239cd6fb368426}
+      \strng{authornamehash}{939f67b3bf4ef2a6cf239cd6fb368426}
+      \strng{authorfullhash}{939f67b3bf4ef2a6cf239cd6fb368426}
+      \field{extraname}{2}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.nmea.org/content/STANDARDS/NMEA_2000}}
+      \field{title}{Stanard protokołu NMEA 2000}
+      \field{year}{2000}
+      \verb{urlraw}
+      \verb https://www.nmea.org/content/STANDARDS/NMEA_2000
+      \endverb
+      \verb{url}
+      \verb https://www.nmea.org/content/STANDARDS/NMEA_2000
+      \endverb
+    \endentry
     \entry{Babel}{misc}{}
       \name{author}{1}{}{%
         {{hash=53718118d84d26983528d262b37ea0be}{%
